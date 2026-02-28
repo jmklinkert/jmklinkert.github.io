@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Space Rebound - Janne Matti Klinkert</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="../styles/project.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <a href="../" class="back-link">← Back to Portfolio</a>
+      <h1>Space Rebound</h1>
+      <p>My first finished Arcade Game — a lesson in beginnings and scope</p>
+      <nav>
+        <a href="#overview">Overview</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#technical">Technical</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Overview Section -->
+      <section id="overview">
+        <div class="project-hero">
+          <div class="project-meta">
+            <span>Arcade Game</span>
+            <span>Solo Project</span>
+            <span>Unity + C#</span>
+            <span>2024</span>
+          </div>
+        </div>
+
+        <h2>Overview</h2>
+        <div class="reveal">
+          <p>
+            A game about ricochet mechanics was an idea stuck in my head for multiple years, so when I started studying
+            media informatics and I had to make my first game, I decided to finally put this idea into practice in a
+            small, simple space-themed Arcade Game.
+          </p>
+
+          <p>
+            Mechanically the Game is quite simple. The Player Character (A triangular Sprite, representing a Spaceship)
+            can be moved left or right either via the Arrow-Keys or via the "A"- and "D"-Keys respectively. The triangle
+            always faces towards the Mouse and the player can shoot bullets by pressing the left mouse button. The bullets
+            bounce off of walls, becoming stronger and changing their colour. For each bounce they go from white, to blue,
+            to orange. Enemies (custom Spaceship Sprites) come in these three colours as well, which signals how much
+            damage they deal, how strong a bullet needs to be at least to hurt them and how many points they award the
+            player for defeating them. After reaching specific Score counts the player reaches the next level (without
+            disrupting any gameplay). Every new Level more enemies and stronger enemies appear on average, until the final
+            level is reached and the Game goes on until the player is defeated, saving their score in a local leaderbord.
+          </p>
+
+          <p>
+            This was probably the least problematic development process I had so far, mostly because this project worked
+            even with quite a small scope of features. I was able to continually build the project over a few months, one
+            step at a time without needing to change direction or refocusing my vision. It started humble it stayed humble
+            and it was an amazing project to teach me the fundamentals of Game Development in Unity.
+          </p>
+
+          <p>
+            Looking at the project now, I however still see areas that could be improved upon. More enemies and more
+            interesting enemies would make the gameplay loop a bit more exciting and would open the door for more unique
+            level configurations with specific enemy types that have synergies or more complex gameplay interactions. In
+            the same breath the enemy balancing would need another looking, as the core ricochet mechanic makes stronger
+            enemies exponentially harder to defeat, while the weakest enemy type can be defeated even without ricocheting
+            bullets, making them feel more like an afterthought.
+          </p>
+        </div>
+      </section>
+
+      <!-- Gallery Section -->
+      <section id="gallery">
+        <h2>Gallery</h2>
+        <p>
+          Below are screenshots and GIFs showcasing Space Rebound in action, along with early prototypes and design
+          iterations.
+        </p>
+
+        <div class="gallery">
+          <div class="gallery-grid reveal-stagger">
+            <div class="gallery-item">
+              <div class="gallery-image">
+                <div class="gallery-placeholder">
+                  [Gameplay GIF]<br />
+                  <small>images/space-rebound-gameplay-1.gif</small>
+                </div>
+              </div>
+              <div class="gallery-caption">Core Gameplay: Ricocheting bullets off walls to defeat enemies</div>
+            </div>
+
+            <div class="gallery-item">
+              <div class="gallery-image">
+                <div class="gallery-placeholder">
+                  [Screenshot]<br />
+                  <small>images/space-rebound-screenshot-1.png</small>
+                </div>
+              </div>
+              <div class="gallery-caption">Main gameplay screen with UI</div>
+            </div>
+
+            <div class="gallery-item">
+              <div class="gallery-image">
+                <div class="gallery-placeholder">
+                  [Gameplay GIF]<br />
+                  <small>images/space-rebound-gameplay-2.gif</small>
+                </div>
+              </div>
+              <div class="gallery-caption">Advanced level design and enemy patterns</div>
+            </div>
+
+            <div class="gallery-item">
+              <div class="gallery-image">
+                <div class="gallery-placeholder">
+                  [WIP Image]<br />
+                  <small>images/space-rebound-prototype.png</small>
+                </div>
+              </div>
+              <div class="gallery-caption">Early prototype iteration</div>
+            </div>
+
+            <div class="gallery-item">
+              <div class="gallery-image">
+                <div class="gallery-placeholder">
+                  [Screenshot]<br />
+                  <small>images/space-rebound-screenshot-2.png</small>
+                </div>
+              </div>
+              <div class="gallery-caption">Menu screen and UI design</div>
+            </div>
+
+            <div class="gallery-item">
+              <div class="gallery-image">
+                <div class="gallery-placeholder">
+                  [WIP/Concept]<br />
+                  <small>images/space-rebound-iteration.png</small>
+                </div>
+              </div>
+              <div class="gallery-caption">Design iteration showing visual refinement</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Technical Section -->
+      <section id="technical">
+        <h2>Technical Details & Systems</h2>
+
+        <div class="tech-details reveal">
+          <h3>Architecture & Implementation</h3>
+          <p>
+            My original vision proved to be a perfect challenge to learn the basics of Unity. Like how to translate the
+            Players Mouse Cursor into a rotation, that makes the player character look at the Cursor position at all
+            times, or how to instantiate Objects, giving them behaviour and a complete working lifecycle, without
+            interfering with the Game's physics. I also dabbled a bit with particle systems ahd learned how to use
+            custom fonts and music, I was able to use for free.
+          </p>
+
+          <div class="details-grid">
+            <div class="detail-item">
+              <h4>Engine</h4>
+              <p>Unity 2022+ with C#</p>
+            </div>
+            <div class="detail-item">
+              <h4>Gameplay Systems</h4>
+              <p>
+                2d Physics for Bullet Behaviour, Collision Detection, Simple Enemy Behaviours, Saving Data between
+                Gameplay Sessions
+              </p>
+            </div>
+            <div class="detail-item">
+              <h4>Development Time</h4>
+              <p>4-5 months of continuous improvements and a short sprint at the end</p>
+            </div>
+            <div class="detail-item">
+              <h4>Team Size</h4>
+              <p>Solo Developer</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <h3>Key Challenges & Solutions</h3>
+          <p>
+            The development process of this game was quite Obstacle-free for the most part. I had some trouble with my
+            custom font though, because the Default font stettings made it look blurry, which is quite bad for an 8-Bit
+            Font. After a day of research even this was easily solved.
+          </p>
+
+          <h3>What I Learned</h3>
+          <p>
+            The biggest lesson this Project taught me, was keeping the Scope small and reasonable. It felt great working
+            on this project, because I could actually reach the goals I set. Additionally it was my first deep-dive into
+            Unity and C# and it was a lot of fun getting to know the workflow. In the end I was holding my first, fully
+            functional, finished Game in my Hands and I am quite happy with the result.
+          </p>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section>
+        <h2>Play Space Rebound</h2>
+        <p>Space Rebound is playable on Itch.io. Try it out and see if you like it!</p>
+        <div class="cta-buttons">
+          <a href="https://your-itch-io-link.itch.io/space-rebound" class="button" target="_blank">
+            Play on Itch.io →
+          </a>
+          <a href="../#projects" class="button secondary"> ← Back to Projects </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>© <span id="current-year"></span> Janne Matti Klinkert. All rights reserved.</p>
+      <p>Built with care for game development studios.</p>
+    </footer>
+    <script>
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>

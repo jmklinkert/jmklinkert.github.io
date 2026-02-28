@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>8-Ball Rogue - Janne Matti Klinkert</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="../styles/project.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <a href="../" class="back-link">← Back to Portfolio</a>
+      <h1>8-Ball Rogue</h1>
+      <p>A mobile roguelike where billiard physics meets roguelike progression</p>
+      <nav>
+        <a href="#overview">Overview</a>
+        <a href="#my-role">My Role</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#technical">Technical</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Overview Section -->
+      <section id="overview">
+        <div class="project-hero">
+          <div class="project-meta">
+            <span>Mobile Roguelike</span>
+            <span>Team Project</span>
+            <span>Android</span>
+            <span>Unity + C#</span>
+          </div>
+        </div>
+
+        <h2>Overview</h2>
+        <div class="reveal">
+          <p>
+            [Introduce 8-Ball Rogue with an engaging hook. What makes combining billiard mechanics with roguelike progression compelling? Describe the core loop: you push enemies into holes by moving a cue ball. As you progress, you unlock upgrades, face new enemy types, and tackle increasingly complex level layouts. What makes it fun?]
+          </p>
+
+          <p>
+            [Explain the roguelike structure. How many floors/rooms does a run have? What kind of upgrades can players unlock? Is there meta-progression between runs? Do you want this to be a casual mobile experience or something with depth for repeated playthroughs?]
+          </p>
+
+          <p>
+            [Discuss the constraints of mobile development. How did touch controls factor in? Did you optimize for different screen sizes? What about performance on lower-end devices? This shows you understand platform-specific considerations.]
+          </p>
+
+          <p>
+            [Talk about the team's vision and your collaborative process. What was the team size? How did design and programming work together to balance and refine gameplay? What surprised you during development?]
+          </p>
+        </div>
+      </section>
+
+      <!-- My Role Section -->
+      <section id="my-role">
+        <h2>My Role: Systems Architecture</h2>
+        <div class="reveal">
+          <p>
+            While this was a team effort, I owned the foundational systems that made 8-Ball Rogue scalable and easy to balance. Specifically: tile systems, level/room generation and management, and the centralized enemy spawn and difficulty configuration.
+          </p>
+
+          <div class="highlight-box">
+            <h4>Core Responsibility</h4>
+            <p>
+              Design and implement flexible systems for level layout, enemy spawning, and difficulty scaling—enabling designers to create and balance content without touching code.
+            </p>
+          </div>
+
+          <h3>Tile System Architecture</h3>
+          <p>
+            [Explain your tile system design. How are rooms composed? Can designers place tiles freely or are there constraints? Did you use scriptable objects to define tile types? Can tiles have special properties (teleporters, hole zones, hazards)? This demonstrates your architectural thinking.]
+          </p>
+
+          <p>
+            [Discuss scalability. As the game grew in scope, did your tile system adapt? How would a designer add a new tile type? This shows you were thinking ahead about maintenance and growth.]
+          </p>
+
+          <h3>Level & Room System</h3>
+          <p>
+            [Describe how levels are structured. Are they hand-crafted, procedurally generated, or a hybrid? How do rooms connect? Is there a main room selection or a linear progression through floors? Did you implement any procedural generation for variety?]
+          </p>
+
+          <p>
+            [Explain the designer workflow. Can a designer build a new room in the editor? How do they validate it? What safeguards did you put in place to prevent unplayable layouts? Show your empathy for the people using your systems.]
+          </p>
+
+          <h3>Enemy Spawn & Difficulty System</h3>
+          <p>
+            [This is a key achievement. Describe your centralized enemy configuration system. How do designers specify what enemies spawn in which room/floor? Can they configure spawn points, quantities, and behavior variations?]
+          </p>
+
+          <p>
+            [Explain the difficulty scaling. Do enemies get stronger as the run progresses? Is there a curve designer can tune? Did you implement algorithms for balancing difficulty, or is it manually configured? This shows systems thinking and understanding of player experience.]
+          </p>
+
+          <h3>Data-Driven Design</h3>
+          <p>
+            [Talk about making your systems data-driven. Instead of hardcoding enemy types or spawn points, did you use configuration files, scriptable objects, or a custom tool? The benefit: designers can iterate quickly without recompiling. This is professional practice and shows maturity.]
+          </p>
+        </div>
+      </section>
+
+      <!-- Gallery Section -->
+      <section id="gallery">
+        <h2>Gallery</h2>
+        <p>
+          Screenshots and gameplay footage from 8-Ball Rogue, showcasing level design, enemy variety, upgrade systems, and mobile UI.
+        </p>
+
+        <div class="gallery">
+          <div class="gallery-grid reveal-stagger">
+            <div class="gallery-item">
+              <div class="gallery-image">
+                <div class="gallery-placeholder">
+                  [Gameplay Screenshot]<br />
+                  <small>images/8ball-rogue-gameplay-1.png</small>
+                </div>
+              </div>
+              <div class="gallery-caption">Core gameplay: pushing enemies into holes</div>
+            </div>
+
+            <div class="gallery-item">
+              <div class="gallery-image">
+                <div class="gallery-placeholder">
+                  [GIF/Video]<br />
+                  <small>images/8ball-rogue-gameplay.gif</small>
+                </div>
+              </div>
+              <div class="gallery-caption">Level progression and billiard mechanics in action</div>
+            </div>
+
+            <div class="gallery-item">
+              <div class="gallery-image">
+                <div class="gallery-placeholder">
+                  [Gameplay Screenshot]<br />
+                  <small>images/8ball-rogue-level-design.png</small>
+                </div>
+              </div>
+              <div class="gallery-caption">Complex room layout with multiple enemy types</div>
+            </div>
+
+            <div class="gallery-item">
+              <div class="gallery-image">
+                <div class="gallery-placeholder">
+                  [Screenshot]<br />
+                  <small>images/8ball-rogue-upgrades.png</small>
+                </div>
+              </div>
+              <div class="gallery-caption">Roguelike upgrade/reward screen</div>
+            </div>
+
+            <div class="gallery-item">
+              <div class="gallery-image">
+                <div class="gallery-placeholder">
+                  [WIP Development Image]<br />
+                  <small>images/8ball-rogue-wip-1.png</small>
+                </div>
+              </div>
+              <div class="gallery-caption">Early iteration of room design and systems</div>
+            </div>
+
+            <div class="gallery-item">
+              <div class="gallery-image">
+                <div class="gallery-placeholder">
+                  [Screenshot]<br />
+                  <small>images/8ball-rogue-screenshot-2.png</small>
+                </div>
+              </div>
+              <div class="gallery-caption">Mobile UI design and player feedback</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Technical Section -->
+      <section id="technical">
+        <h2>Technical Architecture</h2>
+
+        <div class="tech-details reveal">
+          <h3>Tech Stack</h3>
+          <div class="details-grid">
+            <div class="detail-item">
+              <h4>Platform</h4>
+              <p>Android (Mobile)</p>
+            </div>
+            <div class="detail-item">
+              <h4>Engine</h4>
+              <p>Unity</p>
+            </div>
+            <div class="detail-item">
+              <h4>Language</h4>
+              <p>C#</p>
+            </div>
+            <div class="detail-item">
+              <h4>Team Size</h4>
+              <p>[X developers, artists, designers]</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <h3>Systems Design Philosophy</h3>
+          <p>
+            [Explain your architectural philosophy. Did you follow any specific design patterns (MVC, Entity-Component-System, etc.)? What was your goal with the systems you built? Probably: make it easy for designers to create content, maintain performance on mobile, support iterative balancing.]
+          </p>
+
+          <h3>Tile System Implementation</h3>
+          <p>
+            [Go deeper into how you actually implemented it. Scriptable objects for tile definitions? A custom editor script to place tiles? Did you validate tile adjacency or placement rules? This shows technical depth and practical problem-solving.]
+          </p>
+
+          <h3>Level Generation & Room Management</h3>
+          <p>
+            [Describe your approach to levels. If procedural: what's the algorithm? What constraints ensure rooms stay playable? If hand-crafted: how do you manage variations? Did you implement any content streaming or memory optimization for mobile?]
+          </p>
+
+          <h3>Enemy Spawning & Configuration</h3>
+          <p>
+            [Explain the implementation of your enemy spawn system. How does the game read spawn configurations? Can designers add new enemy types? What data is exposed to designers vs. what's locked? This is a good place to show your understanding of the designer/programmer boundary.]
+          </p>
+
+          <h3>Difficulty Scaling Algorithm</h3>
+          <p>
+            [If you implemented a procedural difficulty system, explain the algorithm. What metrics do you track (player performance, time, enemy strength)? Does it adjust on-the-fly or per-room? Did you playtest extensively to get the curve right? This shows systems thinking and iterative design.]
+          </p>
+
+          <h3>Mobile Optimization</h3>
+          <p>
+            [Discuss mobile-specific considerations. How do you handle memory? Physics performance? Did you profile and optimize? Touch input latency? This shows you understand the constraints of shipping on Android.]
+          </p>
+
+          <h3>Lessons & Future Iterations</h3>
+          <p>
+            [Reflect on the project. What would you do differently? What surprised you? Did the centralized spawn system make balancing easier than you expected? What did you learn about user-facing design tools that could inform future projects?]
+          </p>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section>
+        <h2>Scalable Systems in Action</h2>
+        <p>
+          8-Ball Rogue proved that well-architected systems enable fast iteration, reliable balancing, and designer empowerment. The tile, room, and difficulty systems I built became the foundation for confidently adding new content throughout development. That's the kind of systems thinking I bring to every project.
+        </p>
+        <div class="cta-buttons">
+          <a href="../#contact" class="button"> Get In Touch → </a>
+          <a href="../#projects" class="button secondary"> ← Back to Projects </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>© <span id="current-year"></span> Janne Matti Klinkert. All rights reserved.</p>
+      <p>Built with care for game development studios.</p>
+    </footer>
+    <script>
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>

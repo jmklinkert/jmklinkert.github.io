@@ -1,47 +1,216 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Your Name — Portfolio</title>
-    <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Janne Matti Klinkert - Game Developer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/index.css" />
   </head>
   <body>
-    <header class="site-header">
+    <!-- Header -->
+    <header>
       <h1>Janne Matti Klinkert</h1>
-      <p class="tagline">Developer / designer / student</p>
+      <p>Media Informatics Student | Game Developer</p>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </header>
 
     <main>
+      <!-- About Section -->
       <section id="about">
         <h2>About</h2>
-        <p>One or two sentences about you.</p>
+        <div class="about-content reveal">
+          <p>
+            Games have always been a passion of mine, so I studied to become a Game Developer. During my studies I
+            already finished a number of Projects in Game Development and related areas. This website provides
+            breakdowns of some of my finished projects and the skills and learnings I acquired while working on them.
+            <br />
+            I am currently looking for an internship in Game Development or Software Development. If your company is
+            interested, please use the contact information below.
+          </p>
+        </div>
       </section>
 
+      <!-- Projects Section -->
       <section id="projects">
         <h2>Projects</h2>
-        <ul>
-          <li>
-            <strong>Space Rebound</strong> A space-themed Arcace Game, where you need to ricochet Bullets off of Walls
-            to defeat Enemy-Spaceships <a href="#">stuff</a>
-          </li>
-          <li><strong>8-Ball Rogue</strong> A roguelile mobile Game with Billard Mechanics <a href="#">stuff</a></li>
-        </ul>
+        <div class="projects-grid reveal-stagger">
+          <!-- Project 1: Space Rebound -->
+          <a href="projects/space-rebound.html" class="project-card project-link-wrapper">
+            <div class="project-header">
+              <h3 class="project-title">Space Rebound</h3>
+              <div class="project-meta">
+                <span>Arcade</span>
+                <span>Solo</span>
+                <span>Unity</span>
+              </div>
+            </div>
+            <div class="project-media">
+              <div class="project-media-placeholder">
+                [Gameplay GIF or Image]<br />
+                <small>Replace with: images/space-rebound-gameplay.gif</small>
+              </div>
+            </div>
+            <div class="project-content">
+              <div class="project-description">
+                Space Rebound is a space-themed Arcade Game, where you need to ricochet bullets off of walls to defeat
+                enemy spaceships. <br />
+                This was my introduction to Game Development and the Game Engine Unity.
+              </div>
+              <div class="project-footer">
+                <span class="learn-more">Learn More →</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Project 2: Projekt H.A.I -->
+          <a href="projects/projekt-hai.html" class="project-card project-link-wrapper">
+            <div class="project-header">
+              <h3 class="project-title">Projekt H.A.I</h3>
+              <div class="project-meta">
+                <span>VR Game</span>
+                <span>Team</span>
+                <span>Unity</span>
+              </div>
+            </div>
+            <div class="project-media">
+              <div class="project-media-placeholder">
+                [Gameplay GIF or Image]<br />
+                <small>Replace with: images/projekt-hai-gameplay.gif</small>
+              </div>
+            </div>
+            <div class="project-content">
+              <div class="project-description">
+                Projekt H.A.I was a one off VR-Project where my team needed to implement some connection to the Real
+                World, like a special controller or other reallife element. <br />
+                We quite quickly decided to make a fishing Game, which uses a VR-Controller with an added crank, that
+                controls the fishing rod in Game.
+              </div>
+              <div class="project-footer">
+                <span class="learn-more">Learn More →</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Project 3: 8-Ball Rogue -->
+          <a href="projects/8ball-rogue.html" class="project-card project-link-wrapper">
+            <div class="project-header">
+              <h3 class="project-title">8-Ball Rogue</h3>
+              <div class="project-meta">
+                <span>Mobile Roguelike</span>
+                <span>Team</span>
+                <span>Unity</span>
+              </div>
+            </div>
+            <div class="project-media">
+              <div class="project-media-placeholder">
+                [Gameplay GIF or Image]<br />
+                <small>Replace with: images/8ball-rogue-gameplay.gif</small>
+              </div>
+            </div>
+            <div class="project-content">
+              <div class="project-description">
+                8-Ball Rogue is a mobile Roguelike with billiard mechanics.<br />
+                I was responsible for systems programming. Specifically Room settings, Custom TileSets with added
+                functionality and enemy abilities.
+              </div>
+              <div class="project-footer">
+                <span class="learn-more">Learn More →</span>
+              </div>
+            </div>
+          </a>
+        </div>
       </section>
 
+      <!-- Skills Section -->
+      <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-container reveal-stagger">
+          <div class="skill-category">
+            <h3>Game Development</h3>
+            <ul class="skill-list">
+              <li>Unity Engine</li>
+              <li>C# Programming</li>
+              <li>Game Systems Design</li>
+              <li>Level Design</li>
+              <li>Gameplay Programming</li>
+            </ul>
+          </div>
+          <div class="skill-category">
+            <h3>Programming</h3>
+            <ul class="skill-list">
+              <li>Object-Oriented Design</li>
+              <li>Version Control (Git)</li>
+              <li>Debugging & Optimization</li>
+              <li>VR Development</li>
+              <li>Mobile Development</li>
+            </ul>
+          </div>
+          <div class="skill-category">
+            <h3>Tools & Technologies</h3>
+            <ul class="skill-list">
+              <li>Visual Studio</li>
+              <li>Git & GitHub</li>
+              <li>Agile Development</li>
+              <li>Trello / Project Management</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
       <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:you@example.com">jannemattiklinkert@gmail.com</a></p>
-        <p>GitHub: <a href="https://github.com/your-username">github.com/Kondoriusder175ste</a></p>
+        <h2>Get In Touch</h2>
+        <div class="contact-content reveal">
+          <p>
+            I'm actively seeking internship opportunities in game development. Feel free to reach out if you'd like to
+            discuss potential collaborations or just chat about games.
+          </p>
+          <div class="contact-links">
+            <a href="mailto:jannemattiklinkert@gmail.com" class="contact-link">
+              <span class="contact-icon">@</span>
+              jannemattiklinkert@gmail.com
+            </a>
+            <a href="https://www.linkedin.com/in/janne-klinkert-62b97032b/" class="contact-link" target="_blank">
+              <span class="contact-icon">in</span>
+              LinkedIn
+            </a>
+            <a href="https://github.com/Kondoriusder175ste" class="contact-link" target="_blank">
+              <span class="contact-icon">◇</span>
+              GitHub
+            </a>
+          </div>
+          <a href="files/resume.pdf" class="resume-button" download> ↓ Download Resume </a>
+        </div>
       </section>
     </main>
 
+    <!-- Footer -->
     <footer>
-      <small>© Janne Matti Klinkert • <span id="year"></span></small>
+      <p>© <span id="current-year"></span> Janne Matti Klinkert. All rights reserved.</p>
+      <p>Built with care for game development studios.</p>
     </footer>
-
     <script>
-      document.getElementById('year').textContent = new Date().getFullYear();
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
     </script>
   </body>
 </html>
