@@ -6,7 +6,10 @@
     <title>Projekt H.A.I - Janne Matti Klinkert</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../styles/base.css" />
     <link rel="stylesheet" href="../styles/project.css" />
   </head>
@@ -39,19 +42,38 @@
         <h2>Overview</h2>
         <div class="reveal">
           <p>
-            [Open with a captivating description of Projekt H.A.I. What makes it special? A burglar sneaking into an aquarium at night, using a fishing rod to steal fish. But this isn't just any game—describe the VR immersion, the atmosphere, the humor of the premise.]
+            Project H.A.I was created as the result of a very specific assignment: "Make it real". In practice, this
+            meant we needed to create an immersive VR gameplay experience with some connection to the real world. My
+            team decided on the idea of a fishing game and also found a funny premise: a burglar sneaking into a public
+            aquarium to steal the fish out of the tank. The real-life element comes from a custom controller, which
+            features an added crank that controls the fishing rod in-game.
           </p>
 
           <p>
-            [Explain the core gameplay loop in VR context. The player wears a VR headset and holds a custom controller. Describe how they interact with the environment: sneaking, using the fishing rod, catching fish with a bait basket. What makes it fun?]
+            The core gameplay loop revolves around a number of steps. First, the player needs to locate a fish in the
+            aquarium and find the correct bait in their bait box. With the bait prepared, the player needs to lower the
+            fishing hook with the bait near the fish into the water. When the fish bites the hook, the player can feel
+            their controller vibrating and needs to hold still for a few seconds. When the vibration stops, they quickly
+            hoist the fish out of the water before the controller starts vibrating again. After getting the fish out of
+            the water, it needs to be brought to its designated plastic bag, after which it is finally marked as caught.
+            The player needs to catch all 3 fish (a crab, a clownfish and a shark) before the timer on their wrist runs
+            out, which signals a security guard to break into the room and chase the player until they are caught and
+            transported to the game-over scene. Catching all the fish before the time limit and fleeing the aquarium
+            with a rope will transport the player to the victory scene.
           </p>
 
           <p>
-            [Talk about the custom hardware element. You modified a VR controller to include a rotating element. Why? How does it enhance immersion? Does it represent the fishing rod rotation? This is unique and impressive—don't undersell it.]
+            To achieve a connection between the real crank and the game, we connected the crank to an ESP32
+            microcontroller that connects to an MQTT server and writes the current rotation value of the crank to a
+            specific topic. The game then connected to the MQTT server, read the rotation value and smoothly rotated the
+            virtual crank accordingly, changing the fishing hook's height in the process.
           </p>
 
           <p>
-            [Discuss the team and the development journey. Who were your collaborators? What was the experience like working in VR? What were some of the surprises or challenges that only became apparent once you put on the headset?]
+            Our team consisted of three developers: two media informatics students with Unity experience and one pure
+            informatics student without Unity experience. Having the most experience in Unity game development, I was
+            tasked with the more complex system development regarding the bait-rod-fish interactions as well as figuring
+            out the fishing rod behaviour from the rotation data.
           </p>
         </div>
       </section>
@@ -61,34 +83,48 @@
         <h2>My Role: Systems Programming</h2>
         <div class="reveal">
           <p>
-            While this was a team effort, my primary responsibility was the core gameplay systems—specifically the interactions between the fishing rod, bait, and fish. This was more than just coding mechanics; it was about creating a satisfying, intuitive interaction model in VR.
+            While this was a team effort, my primary responsibility was the core gameplay systems, specifically the
+            interactions between the fishing rod, bait, and fish, as well as the translation of real-life rotation data
+            to the virtual fishing rod. This was more than just coding mechanics; it was about creating a satisfying,
+            intuitive interaction model in VR.
           </p>
 
           <div class="highlight-box">
             <h4>Core Responsibility</h4>
             <p>
-              Design and implement the bait-fishing rod-fish interaction system that made catching fish feel natural and rewarding in VR space.
+              Design and implement the bait-fishing rod-fish interaction system that made using the custom controller
+              and in-game objects feel intuitive and fun.
             </p>
           </div>
 
           <h3>Bait System</h3>
           <p>
-            [Describe the bait mechanics. How does the player pick up bait? What properties does it have? How does it interact with fish? Did you have multiple bait types with different effects? This shows systems thinking and gameplay balance.]
+            The baits can be accessed at the bait box, which has an infinite supply of them to prevent a bait from
+            getting stuck out of reach. The player cannot fill the room with infinite bait objects though, as older bait
+            objects are destroyed after a specific number of baits are created. The fish hook has a socket object that a
+            bait can slot into when the grab button is released in its vicinity. Every bait has a corresponding fish
+            that it attracts. The crab has a coin, the clownfish has an anemone and the shark has a steak. Fish can
+            obviously only be attracted if the bait is underwater, so the player needs to lower the fishing rod near the
+            designated fish to try to catch them.
           </p>
 
           <h3>Fishing Rod Mechanics</h3>
           <p>
-            [Explain how the fishing rod works, especially considering the custom hardware. Does the rotating element physically represent rod rotation? How does the player control depth, angle, or rod tension? What happens when they cast or reel in?]
-          </p>
-
-          <h3>Fish AI & Behavior</h3>
-          <p>
-            [Describe the fish systems. How do they detect bait? Do different fish species behave differently? What triggers a "catch"? Did you implement difficulty scaling—easy fish for beginners, tricky ones later? This demonstrates your understanding of game feel and difficulty curves.]
+            The fishing rod is permanently attached to the player's left hand, consisting of a crank, the main rod and a
+            fishing line with a hook at the end. The fishing line consists of a line renderer that is controlled by a
+            Verlet-integration-based rope simulation. The crank rotation and the length of the fishing line are
+            controlled by the physical crank we added to our VR controller. Every time the real crank is rotated, the
+            new rotation position is read by the game and the crank rotates smoothly to match the new rotation. This
+            method works smoothly and responsively with minimal input delay.
           </p>
 
           <h3>Integration Challenges</h3>
           <p>
-            [Talk about the technical challenges specific to VR. Tracking accuracy? Hand presence? Physics at scale? Did integrating the custom hardware present unexpected issues? How did you solve them? This showcases your problem-solving under constraints.]
+            Setting up the microcontroller, MQTT server and game connection required some assistance and took a few
+            weeks to get running, while we got gameplay interactions working much quicker. The rope simulation remained
+            tricky to the end though. The rope sometimes disconnected from the fishing rod due to inconsistencies
+            between the physics refresh rate and the refresh rate of the VR controller object, which was quite a
+            difficult problem that was still not fully solved in the final build.
           </p>
         </div>
       </section>
@@ -97,7 +133,8 @@
       <section id="gallery">
         <h2>Gallery</h2>
         <p>
-          Screenshots and in-game footage from Projekt H.A.I, showing the aquarium environment, the fishing mechanics in action, and the custom hardware controller.
+          Screenshots and in-game footage from Projekt H.A.I, showing the aquarium environment, the fishing mechanics in
+          action, and the custom hardware controller.
         </p>
 
         <div class="gallery">
@@ -186,39 +223,64 @@
             </div>
             <div class="detail-item">
               <h4>Team Size</h4>
-              <p>[X developers, artists, designers]</p>
+              <p>3 Developers</p>
             </div>
           </div>
         </div>
 
         <div class="reveal">
-          <h3>Systems Design Approach</h3>
-          <p>
-            [Explain your architectural approach to the interaction systems. Did you use a state machine for fish behavior? Scriptable objects for bait configurations? Dependency injection? This shows your understanding of scalable, maintainable code.]
-          </p>
-
           <h3>Key Technical Achievements</h3>
           <p>
-            [Describe a technical accomplishment specific to your systems. For example: "Implemented a generalized interaction system that allowed artists to configure new bait and fish types without code changes" or "Optimized the physics interactions to maintain 90 FPS in VR despite complex fish schooling behavior."]
+            The most distinctive technical achievement was the real-world hardware integration. Rather than relying on
+            standard controller input, I was able to translate raw encoder pulses from the physical crank into
+            meaningful in-game values — computing angular deltas, converting them to rope length increments based on a
+            configurable spool circumference, and driving both the visual and physical simulation in the same frame.
+            This meant the game felt directly coupled to the real object in the player's hand, which was central to the
+            whole experience.
           </p>
 
           <p>
-            [Highlight another achievement. Show the depth of your work.]
+            A close second was the rope simulation. Rather than using Unity's built-in physics for the fishing line —
+            which would have been difficult to control precisely — I implemented a custom Verlet integration system
+            building upon an algorithm I found
+            <a href="https://www.habrador.com/tutorials/rope/3-another-simplified-rope/">here</a>, with a configurable
+            constraint-relaxation pass to enforce segment lengths. This gave full control over how the line behaved as
+            the player reeled in or let out slack, and kept the hook's world position stable enough for the fish AI to
+            reason about reliably.
+          </p>
+
+          <p>
+            On the systems side, extending Unity's XR Interaction Toolkit through custom socket interactors was a
+            non-trivial integration challenge. Each socket (The Hook, the Bait and the Fish-Box) needed to enforce game
+            logic (bait type validation, interaction layer swapping, species filtering) while remaining compatible with
+            the toolkit's event model. Getting layer mask switching right, particularly ensuring caught fish
+            transitioned cleanly between their swimming and grabbable states without physics artifacts, required careful
+            sequencing of the XR lifecycle callbacks.
           </p>
 
           <h3>VR-Specific Challenges</h3>
           <p>
-            [Discuss challenges unique to VR. Hand tracking accuracy? Input latency? Scale perception in a virtual aquarium? Physics at 1:1 scale with hardware? How did you iterate and test? This shows you understand the constraints of the medium.]
+            As already mentioned, the rope simulation had some trouble staying connected to the fishing rod while in VR
+            mode, because there was a significant difference in refresh rates between the physics simulation and the
+            controller object.
           </p>
 
-          <h3>Hardware Integration</h3>
           <p>
-            [Dive into the custom controller integration. How does it communicate with the game? What was the calibration process? Did you have to account for sensor drift or variations in how users held it? This is impressive and deserves detailed explanation.]
+            Additionally, it was quite challenging to prevent the player from reaching areas they should not be able to
+            reach, which required me and the team to diligently tag areas that should be off-limits accordingly.
           </p>
 
           <h3>Lessons Learned</h3>
           <p>
-            [Reflect on the project. What surprised you about VR development? How would you approach the interaction systems differently if you did it again? What do you now know about player presence and immersion that you didn't before?]
+            This project opened my eyes to how much is possible in game development, even for a small team of students.
+            Starting the project, I had never developed a VR experience nor connected a Unity game to a microcontroller,
+            but in the end it actually worked. This project was a blast to work on and I had a lot of fun working on all
+            the small gameplay interactions or brainstorming with my team on things we could add or improve.
+          </p>
+
+          <p>
+            This project was, however, also a lesson in working on a single Git repository as a team, which requires
+            setting up robust structures and communicating effectively.
           </p>
         </div>
       </section>
@@ -227,7 +289,9 @@
       <section>
         <h2>Collaborative Success</h2>
         <p>
-          Projekt H.A.I was a testament to what a cohesive team can achieve. My systems programming provided the interactive foundation, but every department—art, audio, design—elevated the experience. If you're looking for someone who can bridge technical depth with collaborative creativity, let's talk.
+          Projekt H.A.I was a testament to what a cohesive team can achieve. My systems programming provided the
+          interactive foundation, but as a team we made it a fun, worthwhile experience in addition to it being a
+          technical showcase for a game with a custom out-of-game element.
         </p>
         <div class="cta-buttons">
           <a href="../#contact" class="button"> Get In Touch → </a>
@@ -244,16 +308,19 @@
     <script>
       document.getElementById('current-year').textContent = new Date().getFullYear();
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' },
+      );
 
-      document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => observer.observe(el));
     </script>
   </body>
 </html>
