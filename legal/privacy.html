@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy - Janne Matti Klinkert</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="../styles/project.css" />
+  </head>
+  <body>
+    <header>
+      <a href="../" class="back-link">← Back to Portfolio</a>
+      <h1>Privacy Policy</h1>
+      <p>Data protection information according to GDPR</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>1. Data Controller</h2>
+        <div class="reveal">
+          <p>
+            The controller responsible for data processing on this website is:
+          </p>
+          <p>
+            Janne Matti Klinkert<br />
+            Drohndorfer Landstraße 94d<br />
+            Email: <a href="mailto:jannemattiklinkert@gmail.com">jannemattiklinkert@gmail.com</a><br />
+            Phone: +49 151 28824812
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>2. General Information on Data Processing</h2>
+        <div class="reveal">
+          <p>
+            The protection of your personal data is important to me. This privacy policy informs you about the nature,
+            scope, and purpose of the personal data collected, used, and processed on this website. This website does
+            not use cookies, analytics tools, or tracking technologies.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>3. Hosting</h2>
+        <div class="reveal">
+          <p>
+            This website is hosted on GitHub Pages, a service provided by GitHub, Inc., 88 Colin P Kelly Jr St,
+            San Francisco, CA 94107, USA. When you visit this website, GitHub may collect technical data such as your
+            IP address in server log files. This is necessary for the delivery of the website and constitutes a
+            legitimate interest pursuant to Art. 6 (1) (f) GDPR. For more information, please refer to
+            <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#data-collection" target="_blank">GitHub's privacy statement regarding GitHub Pages</a>.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>4. Use of Google Fonts</h2>
+        <div class="reveal">
+          <p>
+            This website uses Google Fonts, a service provided by Google Ireland Limited, Gordon House, Barrow Street,
+            Dublin 4, Ireland. When you access this website, your browser loads the required fonts directly from
+            Google's servers. In doing so, your IP address is transmitted to Google. This is necessary for the correct
+            display of the website and constitutes a legitimate interest pursuant to Art. 6 (1) (f) GDPR.
+          </p>
+          <p>
+            Google may transfer data to servers in the USA. An adequate level of data protection is ensured through
+            Google's participation in the EU-US Data Privacy Framework. For more information, please refer to
+            <a href="https://policies.google.com/privacy" target="_blank">Google's privacy policy</a>.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>5. External Links</h2>
+        <div class="reveal">
+          <p>
+            This website contains links to external websites (e.g., GitHub, LinkedIn, Itch.io). When you follow these
+            links, data may be collected by the respective operators in accordance with their own privacy policies. I
+            have no control over the data collected by third parties through their websites.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>6. Your Rights</h2>
+        <div class="reveal">
+          <p>
+            Under the GDPR, you have the following rights regarding your personal data:
+          </p>
+          <ul style="color: var(--text); line-height: 2; padding-left: 1.5rem;">
+            <li>Right of access (Art. 15 GDPR)</li>
+            <li>Right to rectification (Art. 16 GDPR)</li>
+            <li>Right to erasure (Art. 17 GDPR)</li>
+            <li>Right to restriction of processing (Art. 18 GDPR)</li>
+            <li>Right to data portability (Art. 20 GDPR)</li>
+            <li>Right to object (Art. 21 GDPR)</li>
+          </ul>
+          <p>
+            To exercise any of these rights, please contact me at
+            <a href="mailto:jannemattiklinkert@gmail.com">jannemattiklinkert@gmail.com</a>.
+            You also have the right to lodge a complaint with a supervisory authority.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="cta-buttons">
+          <a href="../" class="button secondary">← Back to Portfolio</a>
+          <a href="impressum.html" class="button secondary">Legal Notice →</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© <span id="current-year"></span> Janne Matti Klinkert. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="impressum.html">Legal Notice</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </footer>
+    <script>
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' },
+      );
+
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>
