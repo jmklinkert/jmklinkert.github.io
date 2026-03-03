@@ -6,7 +6,10 @@
     <title>8-Ball Rogue - Janne Matti Klinkert</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../styles/base.css" />
     <link rel="stylesheet" href="../styles/project.css" />
   </head>
@@ -24,6 +27,13 @@
       </nav>
     </header>
 
+    <!-- Hero Image -->
+    <div class="hero-banner">
+      <div class="hero-image">
+        <img src="../images/8ball-rogue-hero.png" alt="8-Ball Rogue gameplay showcase" />
+      </div>
+    </div>
+
     <main>
       <!-- Overview Section -->
       <section id="overview">
@@ -39,19 +49,30 @@
         <h2>Overview</h2>
         <div class="reveal">
           <p>
-            [Introduce 8-Ball Rogue with an engaging hook. What makes combining billiard mechanics with roguelike progression compelling? Describe the core loop: you push enemies into holes by moving a cue ball. As you progress, you unlock upgrades, face new enemy types, and tackle increasingly complex level layouts. What makes it fun?]
+            In 8-Ball Rogue you play as a white billiard Ball, moving from room to room, filled with dangerous billiard
+            Balls, that try to defeat you. Pushing sinking all Enemies in a room, opens a portal, where you can Select
+            one of three random upgrades and enter the next room. After every five rooms you reach a new Level, with
+            different Rooms, with a different Visual Syle, different Obstacles and more, stronger enemies. You earn
+            coins after every room, which you can use in the main menu to buy permanent upgrades, or unlock new
+            Abilities, that can be found in a run.
           </p>
 
           <p>
-            [Explain the roguelike structure. How many floors/rooms does a run have? What kind of upgrades can players unlock? Is there meta-progression between runs? Do you want this to be a casual mobile experience or something with depth for repeated playthroughs?]
+            There are 4 visually different Levels, the Player can reach. Which means a Run that goes through to the end
+            sees 20 Rooms. Each room is pulled from a Level-specific pool and contains random enemies in fixed
+            positions, with random obstacles in fixed layouts.
           </p>
 
           <p>
-            [Discuss the constraints of mobile development. How did touch controls factor in? Did you optimize for different screen sizes? What about performance on lower-end devices? This shows you understand platform-specific considerations.]
+            Developing for mobile was definitely a new Experience for the team, because Screens and UI-Elements had to
+            account for different Screen-Sizes. Because the Player controls the main-Ball by dragging and Shooting,
+            UI-Elements, that activate specific abilities had to be implemented with consideration for accidental
+            activations.
           </p>
 
           <p>
-            [Talk about the team's vision and your collaborative process. What was the team size? How did design and programming work together to balance and refine gameplay? What surprised you during development?]
+            It was our vision as a team to create a fun casual Gameplay experience, by utilizing billiard elements in an
+            interesting way and expanding them with creative imaginative abilities and possibilities.
           </p>
         </div>
       </section>
@@ -61,46 +82,83 @@
         <h2>My Role: Systems Architecture</h2>
         <div class="reveal">
           <p>
-            While this was a team effort, I owned the foundational systems that made 8-Ball Rogue scalable and easy to balance. Specifically: tile systems, level/room generation and management, and the centralized enemy spawn and difficulty configuration.
+            While this was a team effort, I owned the foundational systems that made 8-Ball Rogue scalable and easy to
+            balance. Specifically: tile systems, level/room generation and management, and the centralized enemy spawn
+            and difficulty configuration.
           </p>
 
           <div class="highlight-box">
             <h4>Core Responsibility</h4>
             <p>
-              Design and implement flexible systems for level layout, enemy spawning, and difficulty scaling—enabling designers to create and balance content without touching code.
+              Design and implement flexible systems for level layout, enemy spawning, and difficulty scaling—enabling
+              designers to create and balance content without touching code.
             </p>
           </div>
 
           <h3>Tile System Architecture</h3>
           <p>
-            [Explain your tile system design. How are rooms composed? Can designers place tiles freely or are there constraints? Did you use scriptable objects to define tile types? Can tiles have special properties (teleporters, hole zones, hazards)? This demonstrates your architectural thinking.]
+            Rooms are built on a grid using custom rule tiles, where each tile type carries specific properties: walls,
+            holes, and potential obstacle spawn points are all placed by designers directly in the Unity editor.
+            However, the tile layer only defines the layout. When a room loads, obstacles are instantiated as prefabs on
+            a random selection of marked spawn tiles, and hole tiles get replaced by collider-equipped prefabs that
+            provide the gameplay functionality. This two-layer approach—tiles for layout, prefabs for behavior—was
+            necessary because holes needed reliable world-space positions for collision detection, which proved
+            difficult to achieve with tiles alone.
           </p>
 
           <p>
-            [Discuss scalability. As the game grew in scope, did your tile system adapt? How would a designer add a new tile type? This shows you were thinking ahead about maintenance and growth.]
+            This hybrid approach made the system flexible enough to support four visually distinct levels. The same rule
+            tiles are reused across all levels, but their sprites swap out based on the configured visual style, meaning
+            new levels could be themed without rebuilding room layouts from scratch. That said, the tile-based
+            foundation did introduce some friction—particularly around world-position accuracy—which taught us valuable
+            lessons about when tiles are the right abstraction and when prefab-first designs might be simpler.
           </p>
 
           <h3>Level & Room System</h3>
           <p>
-            [Describe how levels are structured. Are they hand-crafted, procedurally generated, or a hybrid? How do rooms connect? Is there a main room selection or a linear progression through floors? Did you implement any procedural generation for variety?]
+            The game uses a hybrid approach: room shapes—walls, holes, obstacle spots, and numbered enemy positions—are
+            hand-crafted by designers in the Unity editor. But what fills those rooms is controlled by one central
+            ScriptableObject configuration. This single config defines the number of levels, their names, how many rooms
+            each level contains, the min and max counts for enemies and obstacles, and the pools from which rooms,
+            enemies, and obstacles are drawn per level. When a room loads, it pulls a random room layout from the
+            current level's pool and populates it with a random selection of enemies and obstacles within the configured
+            bounds.
           </p>
 
           <p>
-            [Explain the designer workflow. Can a designer build a new room in the editor? How do they validate it? What safeguards did you put in place to prevent unplayable layouts? Show your empathy for the people using your systems.]
+            For designers, adding a new room meant building the layout in the editor with the established tile types,
+            then adding it to the relevant level pool in the central config. The visual style for each level is also
+            configured centrally—identical rule tiles receive different sprites depending on the level, applied
+            automatically at the start of each level. This kept the workflow simple: designers focused on interesting
+            layouts, while the system handled variety and visual theming.
           </p>
 
           <h3>Enemy Spawn & Difficulty System</h3>
           <p>
-            [This is a key achievement. Describe your centralized enemy configuration system. How do designers specify what enemies spawn in which room/floor? Can they configure spawn points, quantities, and behavior variations?]
+            Enemy spawning is driven entirely by the central ScriptableObject configuration. Each level defines its own
+            enemy pool—a set of enemy types that can appear—along with minimum and maximum spawn counts. When a room
+            loads, the system reads the numbered enemy positions from the hand-crafted layout, then fills a random
+            subset of those positions with enemies drawn from the current level's pool, respecting the configured count
+            bounds.
           </p>
 
           <p>
-            [Explain the difficulty scaling. Do enemies get stronger as the run progresses? Is there a curve designer can tune? Did you implement algorithms for balancing difficulty, or is it manually configured? This shows systems thinking and understanding of player experience.]
+            Difficulty scales naturally through the level structure: later levels introduce stronger enemy types into
+            their pools and increase the spawn count ranges. Within a level, the randomized selection ensures variety
+            while the configured min/max values keep the challenge within a tunable range. Because all of this lives in
+            a single config file, balancing was a matter of adjusting numbers rather than touching code—designers could
+            experiment with enemy compositions and spawn densities and immediately see the results in-game.
           </p>
 
           <h3>Data-Driven Design</h3>
           <p>
-            [Talk about making your systems data-driven. Instead of hardcoding enemy types or spawn points, did you use configuration files, scriptable objects, or a custom tool? The benefit: designers can iterate quickly without recompiling. This is professional practice and shows maturity.]
+            A core principle behind the architecture was keeping game data out of code. One central ScriptableObject
+            acts as the single source of truth for the entire run structure: level count, room pools, enemy pools,
+            obstacle pools, spawn ranges, and visual styles. This meant that adding a new level or rebalancing enemy
+            counts never required a code change, just editing the config asset in the Unity inspector. The same pattern
+            applied to individual enemy and obstacle definitions, which were also ScriptableObjects with their own
+            configurable properties. This data-driven approach was especially valuable in a team of five, where not
+            everyone was comfortable working directly in code.
           </p>
         </div>
       </section>
@@ -109,16 +167,16 @@
       <section id="gallery">
         <h2>Gallery</h2>
         <p>
-          Screenshots and gameplay footage from 8-Ball Rogue, showcasing level design, enemy variety, upgrade systems, and mobile UI.
+          Screenshots and gameplay footage from 8-Ball Rogue, showcasing level design, enemy variety, upgrade systems,
+          and mobile UI.
         </p>
 
         <div class="gallery">
           <div class="gallery-grid reveal-stagger">
             <div class="gallery-item">
               <div class="gallery-image">
-                <div class="gallery-placeholder">
-                  [Gameplay Screenshot]<br />
-                  <small>images/8ball-rogue-gameplay-1.png</small>
+                <div class="image-padded">
+                  <img src="../images/8ball-rogue-gameplay.gif" alt="8-Ball Rogue gameplay showcase" />
                 </div>
               </div>
               <div class="gallery-caption">Core gameplay: pushing enemies into holes</div>
@@ -126,19 +184,17 @@
 
             <div class="gallery-item">
               <div class="gallery-image">
-                <div class="gallery-placeholder">
-                  [GIF/Video]<br />
-                  <small>images/8ball-rogue-gameplay.gif</small>
+                <div class="image-padded">
+                  <img src="../images/8ball-rogue-upgrades.gif" alt="8-Ball Rogue gameplay showcase" />
                 </div>
               </div>
-              <div class="gallery-caption">Level progression and billiard mechanics in action</div>
+              <div class="gallery-caption">Upgrade & Reward Screen</div>
             </div>
 
             <div class="gallery-item">
               <div class="gallery-image">
-                <div class="gallery-placeholder">
-                  [Gameplay Screenshot]<br />
-                  <small>images/8ball-rogue-level-design.png</small>
+                <div class="image-padded">
+                  <img src="../images/8ball-rogue-menu.png" alt="8-Ball Rogue gameplay showcase" />
                 </div>
               </div>
               <div class="gallery-caption">Complex room layout with multiple enemy types</div>
@@ -146,32 +202,11 @@
 
             <div class="gallery-item">
               <div class="gallery-image">
-                <div class="gallery-placeholder">
-                  [Screenshot]<br />
-                  <small>images/8ball-rogue-upgrades.png</small>
+                <div class="image-padded">
+                  <img src="../images/8ball-rogue-shop.png" alt="8-Ball Rogue gameplay showcase" />
                 </div>
               </div>
               <div class="gallery-caption">Roguelike upgrade/reward screen</div>
-            </div>
-
-            <div class="gallery-item">
-              <div class="gallery-image">
-                <div class="gallery-placeholder">
-                  [WIP Development Image]<br />
-                  <small>images/8ball-rogue-wip-1.png</small>
-                </div>
-              </div>
-              <div class="gallery-caption">Early iteration of room design and systems</div>
-            </div>
-
-            <div class="gallery-item">
-              <div class="gallery-image">
-                <div class="gallery-placeholder">
-                  [Screenshot]<br />
-                  <small>images/8ball-rogue-screenshot-2.png</small>
-                </div>
-              </div>
-              <div class="gallery-caption">Mobile UI design and player feedback</div>
             </div>
           </div>
         </div>
@@ -198,7 +233,7 @@
             </div>
             <div class="detail-item">
               <h4>Team Size</h4>
-              <p>[X developers, artists, designers]</p>
+              <p>5 (multi-disciplinary)</p>
             </div>
           </div>
         </div>
@@ -206,37 +241,75 @@
         <div class="reveal">
           <h3>Systems Design Philosophy</h3>
           <p>
-            [Explain your architectural philosophy. Did you follow any specific design patterns (MVC, Entity-Component-System, etc.)? What was your goal with the systems you built? Probably: make it easy for designers to create content, maintain performance on mobile, support iterative balancing.]
+            The guiding principle was centralization and configurability. Rather than spreading game rules across dozens
+            of scripts, one ScriptableObject config controls the entire run structure: levels, rooms, enemies,
+            obstacles, and visual styles. This made it possible for any team member to tweak game balance, add content,
+            or adjust the progression without writing code. The architecture prioritized fast iteration on mobile, where
+            build times and testing cycles are already slower than desktop development.
           </p>
 
           <h3>Tile System Implementation</h3>
           <p>
-            [Go deeper into how you actually implemented it. Scriptable objects for tile definitions? A custom editor script to place tiles? Did you validate tile adjacency or placement rules? This shows technical depth and practical problem-solving.]
+            Rooms use Unity's Rule Tile system with custom tile types that carry gameplay-relevant properties. Walls and
+            floor tiles define the room boundary and playable area. Hole tiles and obstacle-spawn tiles mark positions
+            that the room loader processes at runtime: holes get replaced with collider prefabs that handle sinking
+            logic, and obstacle spots receive randomly selected obstacle prefabs from the level's pool. The rule tile
+            setup also enables the visual style system—the same tile rules apply across all levels, but their sprite
+            sets swap based on the level's configured theme.
           </p>
 
           <h3>Level Generation & Room Management</h3>
           <p>
-            [Describe your approach to levels. If procedural: what's the algorithm? What constraints ensure rooms stay playable? If hand-crafted: how do you manage variations? Did you implement any content streaming or memory optimization for mobile?]
+            Each level maintains a pool of hand-crafted room layouts. When the player enters a new room, the system
+            selects a random layout from the current level's pool and instantiates it. The room's numbered enemy
+            positions and obstacle spots are then populated based on the central config's min/max ranges and the level's
+            enemy and obstacle pools. This hybrid approach gives designers full control over spatial design while the
+            randomization layer provides replayability—no two runs feel identical even with the same room layouts.
           </p>
 
           <h3>Enemy Spawning & Configuration</h3>
           <p>
-            [Explain the implementation of your enemy spawn system. How does the game read spawn configurations? Can designers add new enemy types? What data is exposed to designers vs. what's locked? This is a good place to show your understanding of the designer/programmer boundary.]
+            The spawn system reads from per-level configurations that define which enemy types are available and how
+            many can appear. Each room layout contains numbered spawn positions placed by designers. At load time, the
+            system selects a count within the configured range and fills that many positions with enemies randomly drawn
+            from the level's pool. Adding a new enemy type is straightforward: create the enemy prefab with its behavior
+            script, then add it to the relevant level pools in the central config. Designers control the "what" and "how
+            many"—the code handles the "where" and "when."
           </p>
+          <figure class="inline-figure">
+            <div class="image-padded">
+              <img src="../images/8ball-rogue-configurations.png" alt="Description of the screenshot" />
+            </div>
+            <figcaption>Scriptable Object for central Configuration</figcaption>
+          </figure>
 
-          <h3>Difficulty Scaling Algorithm</h3>
+          <h3>Difficulty Scaling</h3>
           <p>
-            [If you implemented a procedural difficulty system, explain the algorithm. What metrics do you track (player performance, time, enemy strength)? Does it adjust on-the-fly or per-room? Did you playtest extensively to get the curve right? This shows systems thinking and iterative design.]
+            Difficulty progresses through the level structure itself. Each level defines its own enemy pool with
+            progressively stronger enemy types, and the spawn count ranges increase as levels advance. Within a level,
+            the randomized enemy selection from the pool provides natural variation in challenge. This config-driven
+            approach made balancing a matter of adjusting pool compositions and count ranges rather than tuning
+            algorithms—practical for a small team that needed to iterate quickly through playtesting.
           </p>
 
           <h3>Mobile Optimization</h3>
           <p>
-            [Discuss mobile-specific considerations. How do you handle memory? Physics performance? Did you profile and optimize? Touch input latency? This shows you understand the constraints of shipping on Android.]
+            Billiard physics on Android required careful attention. The collision-heavy gameplay—multiple balls
+            bouncing, rolling, and sinking simultaneously—put pressure on the physics engine. Tuning physics timesteps,
+            collider precision, and rigidbody sleep thresholds was necessary to maintain consistent performance across a
+            range of Android devices. The prefab-over-tile approach for holes and obstacles also helped here, as it gave
+            us tighter control over collider shapes and physics interactions compared to tile-based colliders.
           </p>
 
           <h3>Lessons & Future Iterations</h3>
           <p>
-            [Reflect on the project. What would you do differently? What surprised you? Did the centralized spawn system make balancing easier than you expected? What did you learn about user-facing design tools that could inform future projects?]
+            The biggest lesson was about team communication. With five people at varying experience levels, art and
+            sound assets went through numerous reworks, and project goals needed multiple reevaluations throughout
+            development. On the technical side, the tile-based room foundation introduced friction—particularly around
+            world-position accuracy for gameplay objects—that a prefab-first approach might have avoided. The
+            centralized ScriptableObject config, however, proved its value: it became the team's shared language for
+            discussing balance and content, and it made late-stage adjustments far less painful than they would have
+            been otherwise.
           </p>
         </div>
       </section>
@@ -245,7 +318,9 @@
       <section>
         <h2>Scalable Systems in Action</h2>
         <p>
-          8-Ball Rogue proved that well-architected systems enable fast iteration, reliable balancing, and designer empowerment. The tile, room, and difficulty systems I built became the foundation for confidently adding new content throughout development. That's the kind of systems thinking I bring to every project.
+          8-Ball Rogue proved that well-architected systems enable fast iteration, reliable balancing, and designer
+          empowerment. The tile, room, and difficulty systems I built became the foundation for confidently adding new
+          content throughout development. That's the kind of systems thinking I bring to every project.
         </p>
         <div class="cta-buttons">
           <a href="../#contact" class="button"> Get In Touch → </a>
@@ -262,16 +337,19 @@
     <script>
       document.getElementById('current-year').textContent = new Date().getFullYear();
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' },
+      );
 
-      document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => observer.observe(el));
     </script>
   </body>
 </html>

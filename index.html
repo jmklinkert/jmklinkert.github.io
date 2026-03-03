@@ -6,7 +6,10 @@
     <title>Janne Matti Klinkert - Game Developer Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles/base.css" />
     <link rel="stylesheet" href="styles/index.css" />
   </head>
@@ -54,10 +57,7 @@
               </div>
             </div>
             <div class="project-media">
-              <div class="project-media-placeholder">
-                [Gameplay GIF or Image]<br />
-                <small>Replace with: images/space-rebound-gameplay.gif</small>
-              </div>
+              <img src="images/space-rebound-gameplay.gif" />
             </div>
             <div class="project-content">
               <div class="project-description">
@@ -74,7 +74,7 @@
           <!-- Project 2: Projekt H.A.I -->
           <a href="projects/projekt-hai.html" class="project-card project-link-wrapper">
             <div class="project-header">
-              <h3 class="project-title">Projekt H.A.I</h3>
+              <h3 class="project-title">Projekt H.A.I.</h3>
               <div class="project-meta">
                 <span>VR Game</span>
                 <span>Team</span>
@@ -82,17 +82,14 @@
               </div>
             </div>
             <div class="project-media">
-              <div class="project-media-placeholder">
-                [Gameplay GIF or Image]<br />
-                <small>Replace with: images/projekt-hai-gameplay.gif</small>
-              </div>
+              <img src="images/projekt-hai-gameplay.gif" />
             </div>
             <div class="project-content">
               <div class="project-description">
-                Projekt H.A.I was a one off VR-Project where my team needed to implement some connection to the Real
+                Projekt H.A.I. was a one off VR-Project where my team needed to implement some connection to the Real
                 World, like a special controller or other reallife element. <br />
-                We quite quickly decided to make a fishing Game, which uses a VR-Controller with an added crank, that
-                controls the fishing rod in Game.
+                We decided to make a fishing Game, which uses a VR-Controller with an added crank, that controls the
+                fishing rod in Game.
               </div>
               <div class="project-footer">
                 <span class="learn-more">Learn More →</span>
@@ -111,10 +108,7 @@
               </div>
             </div>
             <div class="project-media">
-              <div class="project-media-placeholder">
-                [Gameplay GIF or Image]<br />
-                <small>Replace with: images/8ball-rogue-gameplay.gif</small>
-              </div>
+              <img src="images/8ball-rogue-hero.png" />
             </div>
             <div class="project-content">
               <div class="project-description">
@@ -201,16 +195,19 @@
     <script>
       document.getElementById('current-year').textContent = new Date().getFullYear();
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' },
+      );
 
-      document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => observer.observe(el));
     </script>
   </body>
 </html>
