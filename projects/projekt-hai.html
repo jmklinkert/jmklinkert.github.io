@@ -49,7 +49,7 @@
         <h2>Overview</h2>
         <div class="reveal">
           <p>
-            Project H.A.I was created as the result of a very specific assignment: "Make it real". In practice, this
+            Projekt H.A.I was created as the result of a very specific assignment: "Make it real". In practice, this
             meant we needed to create an immersive VR gameplay experience with some connection to the real world. My
             team decided on the idea of a fishing game and also found a funny premise: a burglar sneaking into a public
             aquarium to steal the fish out of the tank. The real-life element comes from a custom controller, which
@@ -63,7 +63,7 @@
             their controller vibrating and needs to hold still for a few seconds. When the vibration stops, they quickly
             hoist the fish out of the water before the controller starts vibrating again. After getting the fish out of
             the water, it needs to be brought to its designated plastic bag, after which it is finally marked as caught.
-            The player needs to catch all 3 fish (a crab, a clownfish and a shark) before the timer on their wrist runs
+            The player needs to catch all three fish (a crab, a clownfish and a shark) before the timer on their wrist runs
             out, which signals a security guard to break into the room and chase the player until they are caught and
             transported to the game-over scene. Catching all the fish before the time limit and fleeing the aquarium
             with a rope will transport the player to the victory scene.
@@ -72,8 +72,8 @@
           <p>
             To achieve a connection between the real crank and the game, we connected the crank to an ESP32
             microcontroller that connects to an MQTT server and writes the current rotation value of the crank to a
-            specific topic. The game then connected to the MQTT server, read the rotation value and smoothly rotated the
-            virtual crank accordingly, changing the fishing hook's height in the process.
+            specific topic. The game then connected to the MQTT server, read the rotation value, and smoothly rotated
+            the virtual crank accordingly, changing the fishing hook's height in the process.
           </p>
 
           <p>
@@ -114,6 +114,12 @@
             obviously only be attracted if the bait is underwater, so the player needs to lower the fishing rod near the
             designated fish to try to catch them.
           </p>
+          <figure class="inline-figure">
+            <div class="image-padded">
+              <img src="../images/projekt-hai-box.png" alt="Description of the screenshot" />
+            </div>
+            <figcaption>Bait Box with the grabbable anemone, coin and steak</figcaption>
+          </figure>
 
           <h3>Fishing Rod Mechanics</h3>
           <p>
@@ -127,11 +133,11 @@
 
           <h3>Integration Challenges</h3>
           <p>
-            Setting up the microcontroller, MQTT server and game connection required some assistance and took a few
-            weeks to get running, while we got gameplay interactions working much quicker. The rope simulation remained
-            tricky to the end though. The rope sometimes disconnected from the fishing rod due to inconsistencies
-            between the physics refresh rate and the refresh rate of the VR controller object, which was quite a
-            difficult problem that was still not fully solved in the final build.
+            Setting up the microcontroller, MQTT server, and game connection required some assistance and took a few
+            weeks to get running, while we got gameplay interactions working much more quickly. The rope simulation
+            remained tricky to the end, though. The rope sometimes disconnected from the fishing rod due to
+            inconsistencies between the physics refresh rate and the refresh rate of the VR controller object, which
+            was a difficult problem that was still not fully solved in the final build.
           </p>
         </div>
       </section>
@@ -140,9 +146,9 @@
       <section id="gallery">
         <h2>Gallery</h2>
         <p>
-          Screenshots and in-game footage from Projekt H.A.I, showing the aquarium environment, the fishing mechanics in
-          action, and the custom hardware controller. Gameplay footage was captured using the OpenXR XR Device Simulator
-          as I do not have access to the custom controller my Team build anymore.
+          Screenshots and in-game footage from Projekt H.A.I, showing the aquarium environment, the fishing mechanics
+          in action, and the custom hardware controller. Gameplay footage was captured using the OpenXR XR Device
+          Simulator, as I no longer have access to the custom controller my team built.
         </p>
 
         <div class="gallery">
@@ -172,7 +178,7 @@
               <div class="gallery-image">
                 <img src="../images/projekt-hai-wip.gif" />
               </div>
-              <div class="gallery-caption">Early development iteration of the fishing rod mqtt Connection</div>
+              <div class="gallery-caption">Early development iteration of the fishing rod MQTT connection</div>
             </div>
 
             <div class="gallery-item">
@@ -234,7 +240,7 @@
 
           <p>
             On the systems side, extending Unity's XR Interaction Toolkit through custom socket interactors was a
-            non-trivial integration challenge. Each socket (The Hook, the Bait and the Fish-Box) needed to enforce game
+            non-trivial integration challenge. Each socket (the hook, the bait and the fish box) needed to enforce game
             logic (bait type validation, interaction layer swapping, species filtering) while remaining compatible with
             the toolkit's event model. Getting layer mask switching right, particularly ensuring caught fish
             transitioned cleanly between their swimming and grabbable states without physics artifacts, required careful
@@ -256,9 +262,10 @@
           <h3>Lessons Learned</h3>
           <p>
             This project opened my eyes to how much is possible in game development, even for a small team of students.
-            Starting the project, I had never developed a VR experience nor connected a Unity game to a microcontroller,
-            but in the end it actually worked. This project was a blast to work on and I had a lot of fun working on all
-            the small gameplay interactions or brainstorming with my team on things we could add or improve.
+            At the start of the project, I had never developed a VR experience or connected a Unity game to a
+            microcontroller, but in the end it actually worked. This project was a blast to work on, and I had a lot of
+            fun implementing all the small gameplay interactions and brainstorming with my team on things we could add
+            or improve.
           </p>
 
           <p>
@@ -287,6 +294,10 @@
     <footer>
       <p>© <span id="current-year"></span> Janne Matti Klinkert. All rights reserved.</p>
       <p>Built with care for game development studios.</p>
+      <div class="footer-links">
+        <a href="../legal/impressum.html">Legal Notice</a>
+        <a href="../legal/privacy.html">Privacy Policy</a>
+      </div>
     </footer>
     <script>
       document.getElementById('current-year').textContent = new Date().getFullYear();

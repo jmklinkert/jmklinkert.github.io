@@ -49,30 +49,48 @@
         <h2>Overview</h2>
         <div class="reveal">
           <p>
-            In 8-Ball Rogue you play as a white billiard Ball, moving from room to room, filled with dangerous billiard
-            Balls, that try to defeat you. Pushing sinking all Enemies in a room, opens a portal, where you can Select
-            one of three random upgrades and enter the next room. After every five rooms you reach a new Level, with
-            different Rooms, with a different Visual Syle, different Obstacles and more, stronger enemies. You earn
-            coins after every room, which you can use in the main menu to buy permanent upgrades, or unlock new
-            Abilities, that can be found in a run.
+            In 8-Ball Rogue you play as a white billiard ball, moving from room to room filled with dangerous billiard
+            balls that try to defeat you. Sinking all enemies in a room opens a portal where you can select one of
+            three random upgrades and enter the next room. After every five rooms you reach a new level with different
+            rooms, a different visual style, different obstacles, and stronger enemies. You earn coins after every room,
+            which you can use in the main menu to buy permanent upgrades or unlock new abilities that can be found
+            during a run.
           </p>
 
           <p>
-            There are 4 visually different Levels, the Player can reach. Which means a Run that goes through to the end
-            sees 20 Rooms. Each room is pulled from a Level-specific pool and contains random enemies in fixed
-            positions, with random obstacles in fixed layouts.
+            There are four visually different levels the player can reach, which means a full run sees 20 rooms. Each
+            room is pulled from a level-specific pool and contains random enemies in fixed positions, with random
+            obstacles in fixed layouts.
           </p>
 
           <p>
-            Developing for mobile was definitely a new Experience for the team, because Screens and UI-Elements had to
-            account for different Screen-Sizes. Because the Player controls the main-Ball by dragging and Shooting,
-            UI-Elements, that activate specific abilities had to be implemented with consideration for accidental
-            activations.
+            Developing for mobile was a new experience for the team, because screens and UI elements had to account for
+            different screen sizes. Because the player controls the main ball by dragging and shooting, UI elements
+            that activate specific abilities had to be implemented with consideration for accidental activations.
           </p>
 
           <p>
-            It was our vision as a team to create a fun casual Gameplay experience, by utilizing billiard elements in an
-            interesting way and expanding them with creative imaginative abilities and possibilities.
+            Upgrades come in two flavours: active abilities and passive upgrades. Active abilities are triggered via
+            on-screen buttons during gameplay. Explosion, for example, creates a large blast that pushes all nearby
+            enemies away—great for creating chaos and sinking enemies at range. Freeze instantly stops the player's
+            momentum, letting them line up another shot immediately, which opens up creative trick-shot plays. Passive
+            upgrades include things like increased maximum speed—more speed means more impact force, which means more
+            fun—or a Shield that blocks one enemy collision or projectile while standing still, giving the player a
+            safety net against a single mistake.
+          </p>
+
+          <p>
+            Enemies are billiard balls with distinct behaviours, each using an ability on cooldown. Particle effects
+            signal how close an enemy is to activating. The Dash enemy is a heavier ball that charges at the player
+            periodically. The Projectile enemy fires a fast, powerful shot on cooldown. The Magic Projectile enemy is
+            lighter and launches a slow projectile that pushes the player toward the nearest hole on contact. The Black
+            Hole enemy is the most dangerous—it spawns a temporary black hole that functions like a regular pocket,
+            instantly removing a life if the player falls in.
+          </p>
+
+          <p>
+            It was our vision as a team to create a fun, casual gameplay experience by utilizing billiard elements in
+            an interesting way and expanding them with creative, imaginative abilities and possibilities.
           </p>
         </div>
       </section>
@@ -149,6 +167,22 @@
             a single config file, balancing was a matter of adjusting numbers rather than touching code—designers could
             experiment with enemy compositions and spawn densities and immediately see the results in-game.
           </p>
+
+          <h3>Visual Effects & UI</h3>
+          <p>
+            Beyond core systems, I was also responsible for the player and enemy visual effects. Each enemy's cooldown
+            ability is telegraphed through particle systems that ramp up as the ability nears activation, giving the
+            player a readable visual cue to react to. I also contributed to parts of the mobile UI, where the main
+            challenge was designing touch-friendly ability buttons that wouldn't trigger accidentally during the
+            drag-to-shoot input.
+          </p>
+
+          <figure class="inline-figure">
+            <div class="image-padded">
+              <img src="../images/8ball-rogue-enemies.gif" alt="Visual Effects for all enemy attacks" />
+            </div>
+            <figcaption>Visual Effects for all enemy attacks</figcaption>
+          </figure>
 
           <h3>Data-Driven Design</h3>
           <p>
@@ -333,6 +367,10 @@
     <footer>
       <p>© <span id="current-year"></span> Janne Matti Klinkert. All rights reserved.</p>
       <p>Built with care for game development studios.</p>
+      <div class="footer-links">
+        <a href="../legal/impressum.html">Legal Notice</a>
+        <a href="../legal/privacy.html">Privacy Policy</a>
+      </div>
     </footer>
     <script>
       document.getElementById('current-year').textContent = new Date().getFullYear();

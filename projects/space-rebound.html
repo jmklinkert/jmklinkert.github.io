@@ -29,9 +29,7 @@
     <!-- Hero Image -->
     <div class="hero-banner">
       <div class="hero-image">
-        <img src="../images/space-rebound-hero.png" />
-        <!-- Replace the div.hero-placeholder above with:
-             <img src="../images/space-rebound-hero.png" alt="Space Rebound gameplay showcase" /> -->
+        <img src="../images/space-rebound-hero.png" alt="Space Rebound gameplay showcase" />
       </div>
     </div>
 
@@ -50,18 +48,18 @@
         <h2>Overview</h2>
         <div class="reveal">
           <p>
-            A game about ricochet mechanics was an idea stuck in my head for multiple years, so when I started studying
-            media informatics and I had to make my first game, I decided to finally put this idea into practice in a
-            small, simple space-themed Arcade Game.
+            The idea of a game built around ricochet mechanics had been stuck in my head for years, so when I started
+            studying media informatics and had to make my first game, I decided to finally put it into practice as a
+            small, simple, space-themed arcade game.
           </p>
 
           <p>
             Mechanically, the game is quite simple. The player character (a triangular sprite representing a spaceship)
             can be moved left or right either via the arrow keys or via the "A" and "D" keys respectively. The triangle
-            always faces towards the mouse and the player can shoot bullets by pressing the left mouse button. The
-            bullets bounce off walls, becoming stronger and changing their colour. For each bounce they go from white,
-            to blue, to orange. Enemies (custom spaceship sprites) come in these three colours as well, which signals
-            how much damage they deal, how strong a bullet needs to be at least to hurt them, and how many points they
+            always faces towards the mouse, and the player can shoot bullets by pressing the left mouse button. The
+            bullets bounce off walls, becoming stronger and changing their colour. With each bounce, they go from
+            white to blue to orange. Enemies (custom spaceship sprites) come in these three colours as well, which
+            signals how much damage they deal, how strong a bullet needs to be to hurt them, and how many points they
             award the player for defeating them. After reaching specific score counts, the player reaches the next level
             (without disrupting any gameplay). With every new level, more enemies and stronger enemies appear on
             average, until the final level is reached and the game goes on until the player is defeated, saving their
@@ -69,19 +67,19 @@
           </p>
 
           <p>
-            This was probably the least problematic development process I have had so far, mostly because this project
-            worked even with quite a small scope of features. I was able to continually build the project over a few
-            months, one step at a time, without needing to change direction or refocus my vision. It started humble, it
-            stayed humble, and it was an amazing project to teach me the fundamentals of game development in Unity.
+            This was probably the smoothest development process I have had so far, mostly because the project worked
+            well even with a small scope of features. I was able to build it continuously over a few months, one step
+            at a time, without needing to change direction or refocus my vision. It started humble, it stayed humble,
+            and it was an amazing project for teaching me the fundamentals of game development in Unity.
           </p>
 
           <p>
-            Looking at the project now, I still see areas that could be improved upon. More enemies and more interesting
-            enemies would make the gameplay loop a bit more exciting and would open the door for more unique level
-            configurations with specific enemy types that have synergies or more complex gameplay interactions. In the
-            same breath, the enemy balancing would need another look, as the core ricochet mechanic makes stronger
-            enemies exponentially harder to defeat, while the weakest enemy type can be defeated even without
-            ricocheting bullets, making them feel more like an afterthought.
+            Looking at the project now, I still see areas that could be improved. More varied and interesting enemies
+            would make the gameplay loop more exciting and open the door for unique level configurations with enemy
+            types that have synergies or more complex gameplay interactions. In the same breath, the enemy balancing
+            would need another look, as the core ricochet mechanic makes stronger enemies exponentially harder to
+            defeat, while the weakest enemy type can be defeated without ricocheting bullets at all, making them feel
+            like an afterthought.
           </p>
         </div>
       </section>
@@ -134,11 +132,10 @@
         <div class="tech-details reveal">
           <h3>Architecture & Implementation</h3>
           <p>
-            My original vision proved to be a perfect challenge to learn the basics of Unity, like how to translate the
-            player's mouse cursor into a rotation that makes the player character look at the cursor position at all
-            times, or how to instantiate objects, giving them behaviour and a complete working lifecycle without
-            interfering with the game's physics. I also dabbled a bit with particle systems and learned how to use
-            custom fonts and music.
+            My original vision proved to be a perfect challenge for learning the basics of Unity: translating the
+            mouse cursor position into a rotation so the player character always faces it, instantiating objects and
+            giving them behaviour with a complete lifecycle without interfering with the game's physics, and working
+            with particle systems, custom fonts, and music.
           </p>
 
           <div class="details-grid">
@@ -161,19 +158,51 @@
         </div>
 
         <div class="reveal">
+          <h3>Ricochet System</h3>
+          <p>
+            The core ricochet mechanic uses Unity's 2D physics with fully bouncy rigidbodies. When a bullet collides
+            with a wall, it gains a strength increment and changes colour accordingly—white, blue, then orange. When a
+            bullet hits an enemy, the enemy checks the bullet's current strength against its own: if the bullet is
+            strong enough, the enemy is defeated and the bullet's strength is reduced by the enemy's value. This means a
+            strength-2 bullet that kills a strength-1 enemy survives as a strength-1 bullet, creating satisfying
+            chain-hit moments.
+          </p>
+
+          <h3>Enemy Spawning</h3>
+          <p>
+            Enemies spawn off-screen at a random horizontal position between the two walls. The type of enemy spawned is
+            determined by weighted probabilities tied to the current level—early levels heavily favour weak enemies,
+            while later levels shift the odds toward stronger types. This keeps the difficulty curve feeling natural
+            without requiring hand-placed enemy encounters.
+          </p>
+
+          <figure class="inline-figure">
+            <div class="image-padded">
+              <img src="../images/space-rebound-enemies.png" alt="Description of the screenshot" />
+            </div>
+            <figcaption>Different Enemy Types and their bullets</figcaption>
+          </figure>
+
+          <h3>Score Persistence</h3>
+          <p>
+            The leaderboard stores high scores using Unity's PlayerPrefs system, which was the simplest approach for a
+            first project. Looking back, a JSON-based solution would be more robust and portable, but PlayerPrefs served
+            the purpose well for a local-only leaderboard.
+          </p>
+
           <h3>Key Challenges & Solutions</h3>
           <p>
-            The development process of this game was quite obstacle-free for the most part. I had some trouble with my
-            custom font though, because the default font settings made it look blurry, which is quite bad for an 8-bit
-            font. After a day of research, even this was easily solved.
+            The development process was largely obstacle-free. I did have some trouble with my custom font, because
+            the default font settings made it look blurry—quite bad for an 8-bit font. After a day of research, even
+            this was easily resolved.
           </p>
 
           <h3>What I Learned</h3>
           <p>
-            The biggest lesson this project taught me was keeping the scope small and reasonable. It felt great working
-            on this project because I could actually reach the goals I set. Additionally, it was my first deep dive into
-            Unity and C#, and it was a lot of fun getting to know the workflow. In the end, I was holding my first fully
-            functional, finished game in my hands, and I am quite happy with the result.
+            The biggest lesson this project taught me was keeping the scope small and reasonable. It felt great
+            working on it because I could actually reach the goals I set. Additionally, it was my first deep dive into
+            Unity and C#, and it was a lot of fun getting to know the workflow. In the end, I was holding my first
+            fully functional, finished game in my hands, and I am quite happy with the result.
           </p>
         </div>
       </section>
@@ -183,9 +212,7 @@
         <h2>Play Space Rebound</h2>
         <p>Space Rebound is playable on Itch.io. Try it out and see if you like it!</p>
         <div class="cta-buttons">
-          <a href="https://your-itch-io-link.itch.io/space-rebound" class="button" target="_blank">
-            Play on Itch.io →
-          </a>
+          <a href="https://kondorius.itch.io/space-rebound" class="button" target="_blank"> Play on Itch.io → </a>
           <a href="../#projects" class="button secondary"> ← Back to Projects </a>
         </div>
       </section>
@@ -195,6 +222,10 @@
     <footer>
       <p>© <span id="current-year"></span> Janne Matti Klinkert. All rights reserved.</p>
       <p>Built with care for game development studios.</p>
+      <div class="footer-links">
+        <a href="../legal/impressum.html">Legal Notice</a>
+        <a href="../legal/privacy.html">Privacy Policy</a>
+      </div>
     </footer>
     <script>
       document.getElementById('current-year').textContent = new Date().getFullYear();
