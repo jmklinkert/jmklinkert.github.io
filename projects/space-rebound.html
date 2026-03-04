@@ -55,7 +55,7 @@
 
           <p>
             The player controls a spaceship that always faces the mouse cursor and shoots bullets that bounce off walls,
-            growing stronger and changing colour with each ricochet. Enemies come in matching colour tiers—signalling
+            growing stronger and changing colour with each ricochet. Enemies come in matching colour tiers, signalling
             their toughness, damage, and point value. Reaching score thresholds advances the player to the next level,
             which shifts enemy spawns toward stronger types. After the final level, the game continues until the player
             is defeated and their score is saved to a local leaderboard.
@@ -65,9 +65,8 @@
             Looking at the project now, I still see areas that could be improved. More varied and interesting enemies
             would make the gameplay loop more exciting and open the door for unique level configurations with enemy
             types that have synergies or more complex gameplay interactions. The enemy balancing would also need another
-            look, as the core ricochet mechanic makes stronger enemies exponentially harder to defeat, while the
-            weakest enemy type can be defeated without ricocheting bullets at all, making them feel like an
-            afterthought.
+            look, as the core ricochet mechanic makes stronger enemies exponentially harder to defeat, while the weakest
+            enemy type can be defeated without ricocheting bullets at all, making them feel like an afterthought.
           </p>
         </div>
       </section>
@@ -84,7 +83,10 @@
           <div class="gallery-grid reveal-stagger">
             <div class="gallery-item">
               <div class="gallery-image">
-                <img src="../images/space-rebound-gameplay.gif" alt="Core gameplay: ricocheting bullets off walls to defeat enemies" />
+                <img
+                  src="../images/space-rebound-gameplay.gif"
+                  alt="Core gameplay: ricocheting bullets off walls to defeat enemies"
+                />
               </div>
               <div class="gallery-caption">Core Gameplay: Ricocheting bullets off walls to defeat enemies</div>
             </div>
@@ -120,10 +122,10 @@
         <div class="tech-details reveal">
           <h3>Architecture & Implementation</h3>
           <p>
-            My original vision proved to be a perfect challenge for learning the basics of Unity: translating the
-            mouse cursor position into a rotation so the player character always faces it, instantiating objects and
-            giving them behaviour with a complete lifecycle without interfering with the game's physics, and working
-            with particle systems, custom fonts, and music.
+            My original vision proved to be a perfect challenge for learning the basics of Unity: translating the mouse
+            cursor position into a rotation so the player character always faces it, instantiating objects and giving
+            them behaviour with a complete lifecycle without interfering with the game's physics, and working with
+            particle systems, fonts, and music.
           </p>
 
           <div class="details-grid">
@@ -159,7 +161,7 @@
           <h3>Enemy Spawning</h3>
           <p>
             Enemies spawn off-screen at a random horizontal position between the two walls. The type of enemy spawned is
-            determined by weighted probabilities tied to the current level—early levels heavily favour weak enemies,
+            determined by weighted probabilities tied to the current level. Early levels heavily favour weak enemies,
             while later levels shift the odds toward stronger types. This keeps the difficulty curve feeling natural
             without requiring hand-placed enemy encounters.
           </p>
@@ -180,17 +182,17 @@
 
           <h3>Key Challenges & Solutions</h3>
           <p>
-            The development process was largely obstacle-free. I did have some trouble with my custom font, because
-            the default font settings made it look blurry—quite bad for an 8-bit font. After a day of research, even
-            this was easily resolved.
+            The development process was largely obstacle-free. I did have some trouble with the free-to-use font I used
+            for the text, because the default font settings made it look blurry (quite bad for an 8-bit font). After a
+            day of research however, even this was easily resolved.
           </p>
 
           <h3>What I Learned</h3>
           <p>
             The biggest lesson was keeping scope small and reasonable. Because the project worked well even with a
-            limited feature set, I was able to build it continuously over a few months—one step at a time—without
-            needing to change direction. As my first deep dive into Unity and C#, it taught me the fundamentals of
-            game development in a way that felt natural, and I ended up with my first fully functional, finished game.
+            limited feature set, I was able to build it continuously over a few months one step at a time, without
+            needing to change direction. As my first deep dive into Unity and C#, it taught me the fundamentals of game
+            development in a way that felt natural, and I ended up with my first fully functional, finished game.
           </p>
         </div>
       </section>

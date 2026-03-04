@@ -52,9 +52,9 @@
             In 8-Ball Rogue you play as a white billiard ball, moving from room to room filled with dangerous billiard
             balls that try to defeat you. Sinking all enemies in a room opens a portal where you can select one of three
             random upgrades and enter the next room. After every five rooms you reach a new level with different rooms,
-            a different visual style, different obstacles, and stronger enemies. A full run spans four visually distinct
-            levels and 20 rooms. Between rooms you earn coins that can be spent in the main menu on permanent upgrades
-            or new abilities that appear during future runs.
+            a different visual style, different obstacles, and stronger enemies. A full run spans three visually
+            distinct levels and 15 rooms. Between rooms you earn coins that can be spent in the main menu on permanent
+            upgrades or new abilities that appear during future runs.
           </p>
 
           <p>
@@ -62,9 +62,8 @@
             on-screen buttons during gameplay. Explosion, for example, creates a large blast that pushes all nearby
             enemies away—great for sinking enemies at range. Freeze instantly stops the player's momentum, letting them
             line up another shot immediately, which opens up creative trick-shot plays. Passive upgrades include things
-            like increased maximum speed—more speed means more impact force, which means more fun—or a Shield that
-            blocks one enemy collision or projectile while standing still, giving the player a safety net against a
-            single mistake.
+            like increased maximum speed, or a Shield that blocks one enemy collision or projectile while standing
+            still, giving the player a safety net against a single mistake.
           </p>
 
           <p>
@@ -72,7 +71,7 @@
             signal how close an enemy is to activating. The Dash enemy is a heavier ball that charges at the player
             periodically. The Projectile enemy fires a fast, powerful shot on cooldown. The Magic Projectile enemy is
             lighter and launches a slow projectile that pushes the player toward the nearest hole on contact. The Black
-            Hole enemy is the most dangerous—it spawns a temporary black hole that functions like a regular pocket,
+            Hole enemy is the most dangerous—it shoots a black hole projectile that functions like a regular pocket,
             instantly removing a life if the player falls in.
           </p>
         </div>
@@ -91,8 +90,8 @@
           <div class="highlight-box">
             <h4>Core Responsibility</h4>
             <p>
-              Design and implement flexible systems for level layout, enemy spawning, and difficulty scaling—enabling
-              designers to create and balance content without touching code.
+              Design and implement flexible systems for level layout, enemy spawning, and difficulty scaling, enabling
+              team members to create and balance content without touching code.
             </p>
           </div>
 
@@ -102,22 +101,32 @@
             holes, and potential obstacle spawn points are all placed by designers directly in the Unity editor.
             However, the tile layer only defines the layout. When a room loads, obstacles are instantiated as prefabs on
             a random selection of marked spawn tiles, and hole tiles get replaced by collider-equipped prefabs that
-            provide the gameplay functionality. This two-layer approach—tiles for layout, prefabs for behavior—was
-            necessary because holes needed reliable world-space positions for collision detection, which proved
-            difficult to achieve with tiles alone. The same rule tiles are reused across all four levels, with sprites
-            swapping based on the configured visual style, so new levels could be themed without rebuilding layouts.
+            provide the gameplay functionality. This two-layer approach was necessary because holes needed reliable
+            world-space positions for collision detection, which proved difficult to achieve with tiles alone. The same
+            rule tiles are reused across all four levels, with sprites swapping based on the configured visual style, so
+            new levels could be themed without rebuilding layouts.
           </p>
 
           <h3>Level & Room System</h3>
           <p>
-            Room shapes—walls, holes, obstacle spots, and numbered enemy positions—are hand-crafted by designers in the
+            Room shapes, walls, holes, obstacle spots, and numbered enemy positions are hand-crafted by designers in the
             Unity editor, but what fills those rooms is controlled by one central ScriptableObject configuration. This
             single config defines the number of levels, how many rooms each level contains, spawn count ranges for
             enemies and obstacles, and the pools from which rooms, enemies, and obstacles are drawn per level. When a
             room loads, it pulls a random layout from the current level's pool and populates it within the configured
-            bounds. For designers, adding a new room meant building the layout and dropping it into the relevant pool—the
-            system handled randomization and theming from there.
+            bounds. For designers, adding a new room meant building the layout and dropping it into the relevant
+            pool—the system handled randomization and theming from there.
           </p>
+
+          <figure class="inline-figure">
+            <div class="image-padded">
+              <img
+                src="../images/8ball-rogue-configurations.png"
+                alt="Central ScriptableObject configuration in the Unity inspector"
+              />
+            </div>
+            <figcaption>Scriptable Object for central Configuration</figcaption>
+          </figure>
 
           <h3>Enemy Spawn & Difficulty System</h3>
           <p>
@@ -144,7 +153,6 @@
             </div>
             <figcaption>Visual Effects for all enemy attacks</figcaption>
           </figure>
-
         </div>
       </section>
 
@@ -233,22 +241,15 @@
             build times and testing cycles are already slower than desktop development.
           </p>
 
-          <figure class="inline-figure">
-            <div class="image-padded">
-              <img src="../images/8ball-rogue-configurations.png" alt="Central ScriptableObject configuration in the Unity inspector" />
-            </div>
-            <figcaption>Scriptable Object for central Configuration</figcaption>
-          </figure>
-
           <h3>Lessons & Future Iterations</h3>
           <p>
             The biggest lesson was about team communication. With five people at varying experience levels, art and
             sound assets went through numerous reworks, and project goals needed multiple reevaluations throughout
-            development. On the technical side, the tile-based room foundation introduced friction—particularly around
-            world-position accuracy for gameplay objects—that a prefab-first approach might have avoided. The
+            development. On the technical side, the tile-based room foundation introduced friction, particularly around
+            world-position accuracy for gameplay objects, that a prefab-first approach might have avoided. The
             centralized ScriptableObject config, however, proved its value: it became the team's shared language for
-            discussing balance and content, and it made late-stage adjustments far less painful than they would have
-            been otherwise.
+            discussing balance and content, and it made late-stage and on-the-fly adjustments far less painful than they
+            would have been otherwise.
           </p>
         </div>
       </section>
