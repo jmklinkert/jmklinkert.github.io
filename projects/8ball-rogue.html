@@ -50,33 +50,21 @@
         <div class="reveal">
           <p>
             In 8-Ball Rogue you play as a white billiard ball, moving from room to room filled with dangerous billiard
-            balls that try to defeat you. Sinking all enemies in a room opens a portal where you can select one of
-            three random upgrades and enter the next room. After every five rooms you reach a new level with different
-            rooms, a different visual style, different obstacles, and stronger enemies. You earn coins after every room,
-            which you can use in the main menu to buy permanent upgrades or unlock new abilities that can be found
-            during a run.
-          </p>
-
-          <p>
-            There are four visually different levels the player can reach, which means a full run sees 20 rooms. Each
-            room is pulled from a level-specific pool and contains random enemies in fixed positions, with random
-            obstacles in fixed layouts.
-          </p>
-
-          <p>
-            Developing for mobile was a new experience for the team, because screens and UI elements had to account for
-            different screen sizes. Because the player controls the main ball by dragging and shooting, UI elements
-            that activate specific abilities had to be implemented with consideration for accidental activations.
+            balls that try to defeat you. Sinking all enemies in a room opens a portal where you can select one of three
+            random upgrades and enter the next room. After every five rooms you reach a new level with different rooms,
+            a different visual style, different obstacles, and stronger enemies. A full run spans four visually distinct
+            levels and 20 rooms. Between rooms you earn coins that can be spent in the main menu on permanent upgrades
+            or new abilities that appear during future runs.
           </p>
 
           <p>
             Upgrades come in two flavours: active abilities and passive upgrades. Active abilities are triggered via
             on-screen buttons during gameplay. Explosion, for example, creates a large blast that pushes all nearby
-            enemies away—great for creating chaos and sinking enemies at range. Freeze instantly stops the player's
-            momentum, letting them line up another shot immediately, which opens up creative trick-shot plays. Passive
-            upgrades include things like increased maximum speed—more speed means more impact force, which means more
-            fun—or a Shield that blocks one enemy collision or projectile while standing still, giving the player a
-            safety net against a single mistake.
+            enemies away—great for sinking enemies at range. Freeze instantly stops the player's momentum, letting them
+            line up another shot immediately, which opens up creative trick-shot plays. Passive upgrades include things
+            like increased maximum speed—more speed means more impact force, which means more fun—or a Shield that
+            blocks one enemy collision or projectile while standing still, giving the player a safety net against a
+            single mistake.
           </p>
 
           <p>
@@ -86,11 +74,6 @@
             lighter and launches a slow projectile that pushes the player toward the nearest hole on contact. The Black
             Hole enemy is the most dangerous—it spawns a temporary black hole that functions like a regular pocket,
             instantly removing a life if the player falls in.
-          </p>
-
-          <p>
-            It was our vision as a team to create a fun, casual gameplay experience by utilizing billiard elements in
-            an interesting way and expanding them with creative, imaginative abilities and possibilities.
           </p>
         </div>
       </section>
@@ -121,60 +104,38 @@
             a random selection of marked spawn tiles, and hole tiles get replaced by collider-equipped prefabs that
             provide the gameplay functionality. This two-layer approach—tiles for layout, prefabs for behavior—was
             necessary because holes needed reliable world-space positions for collision detection, which proved
-            difficult to achieve with tiles alone.
-          </p>
-
-          <p>
-            This hybrid approach made the system flexible enough to support four visually distinct levels. The same rule
-            tiles are reused across all levels, but their sprites swap out based on the configured visual style, meaning
-            new levels could be themed without rebuilding room layouts from scratch. That said, the tile-based
-            foundation did introduce some friction—particularly around world-position accuracy—which taught us valuable
-            lessons about when tiles are the right abstraction and when prefab-first designs might be simpler.
+            difficult to achieve with tiles alone. The same rule tiles are reused across all four levels, with sprites
+            swapping based on the configured visual style, so new levels could be themed without rebuilding layouts.
           </p>
 
           <h3>Level & Room System</h3>
           <p>
-            The game uses a hybrid approach: room shapes—walls, holes, obstacle spots, and numbered enemy positions—are
-            hand-crafted by designers in the Unity editor. But what fills those rooms is controlled by one central
-            ScriptableObject configuration. This single config defines the number of levels, their names, how many rooms
-            each level contains, the min and max counts for enemies and obstacles, and the pools from which rooms,
-            enemies, and obstacles are drawn per level. When a room loads, it pulls a random room layout from the
-            current level's pool and populates it with a random selection of enemies and obstacles within the configured
-            bounds.
-          </p>
-
-          <p>
-            For designers, adding a new room meant building the layout in the editor with the established tile types,
-            then adding it to the relevant level pool in the central config. The visual style for each level is also
-            configured centrally—identical rule tiles receive different sprites depending on the level, applied
-            automatically at the start of each level. This kept the workflow simple: designers focused on interesting
-            layouts, while the system handled variety and visual theming.
+            Room shapes—walls, holes, obstacle spots, and numbered enemy positions—are hand-crafted by designers in the
+            Unity editor, but what fills those rooms is controlled by one central ScriptableObject configuration. This
+            single config defines the number of levels, how many rooms each level contains, spawn count ranges for
+            enemies and obstacles, and the pools from which rooms, enemies, and obstacles are drawn per level. When a
+            room loads, it pulls a random layout from the current level's pool and populates it within the configured
+            bounds. For designers, adding a new room meant building the layout and dropping it into the relevant pool—the
+            system handled randomization and theming from there.
           </p>
 
           <h3>Enemy Spawn & Difficulty System</h3>
           <p>
-            Enemy spawning is driven entirely by the central ScriptableObject configuration. Each level defines its own
-            enemy pool—a set of enemy types that can appear—along with minimum and maximum spawn counts. When a room
-            loads, the system reads the numbered enemy positions from the hand-crafted layout, then fills a random
-            subset of those positions with enemies drawn from the current level's pool, respecting the configured count
-            bounds.
-          </p>
-
-          <p>
-            Difficulty scales naturally through the level structure: later levels introduce stronger enemy types into
-            their pools and increase the spawn count ranges. Within a level, the randomized selection ensures variety
-            while the configured min/max values keep the challenge within a tunable range. Because all of this lives in
-            a single config file, balancing was a matter of adjusting numbers rather than touching code—designers could
-            experiment with enemy compositions and spawn densities and immediately see the results in-game.
+            Each level defines its own enemy pool and spawn count range. When a room loads, the system reads the
+            numbered enemy positions from the hand-crafted layout and fills a random subset with enemies drawn from the
+            current level's pool. Difficulty scales through the level structure itself: later levels introduce stronger
+            enemy types and increase spawn counts. Because everything lives in the central config, balancing was a
+            matter of adjusting numbers—designers could experiment with enemy compositions and immediately see results
+            in-game.
           </p>
 
           <h3>Visual Effects & UI</h3>
           <p>
             Beyond core systems, I was also responsible for the player and enemy visual effects. Each enemy's cooldown
             ability is telegraphed through particle systems that ramp up as the ability nears activation, giving the
-            player a readable visual cue to react to. I also contributed to parts of the mobile UI, where the main
-            challenge was designing touch-friendly ability buttons that wouldn't trigger accidentally during the
-            drag-to-shoot input.
+            player a readable visual cue to react to. I also contributed to parts of the mobile UI—a new challenge for
+            the team, since elements had to account for varying screen sizes. The main difficulty was designing
+            touch-friendly ability buttons that wouldn't trigger accidentally during the drag-to-shoot input.
           </p>
 
           <figure class="inline-figure">
@@ -184,16 +145,6 @@
             <figcaption>Visual Effects for all enemy attacks</figcaption>
           </figure>
 
-          <h3>Data-Driven Design</h3>
-          <p>
-            A core principle behind the architecture was keeping game data out of code. One central ScriptableObject
-            acts as the single source of truth for the entire run structure: level count, room pools, enemy pools,
-            obstacle pools, spawn ranges, and visual styles. This meant that adding a new level or rebalancing enemy
-            counts never required a code change, just editing the config asset in the Unity inspector. The same pattern
-            applied to individual enemy and obstacle definitions, which were also ScriptableObjects with their own
-            configurable properties. This data-driven approach was especially valuable in a team of five, where not
-            everyone was comfortable working directly in code.
-          </p>
         </div>
       </section>
 
@@ -219,7 +170,7 @@
             <div class="gallery-item">
               <div class="gallery-image">
                 <div class="image-padded">
-                  <img src="../images/8ball-Rogue-upgrades.gif" alt="8-Ball Rogue gameplay showcase" />
+                  <img src="../images/8ball-Rogue-upgrades.gif" alt="Upgrade and reward screen" />
                 </div>
               </div>
               <div class="gallery-caption">Upgrade & Reward Screen</div>
@@ -228,7 +179,7 @@
             <div class="gallery-item">
               <div class="gallery-image">
                 <div class="image-padded">
-                  <img src="../images/8ball-rogue-menu.png" alt="8-Ball Rogue gameplay showcase" />
+                  <img src="../images/8ball-rogue-menu.png" alt="Main menu screen" />
                 </div>
               </div>
               <div class="gallery-caption">Main Menu Screen</div>
@@ -237,7 +188,7 @@
             <div class="gallery-item">
               <div class="gallery-image">
                 <div class="image-padded">
-                  <img src="../images/8ball-rogue-shop.png" alt="8-Ball Rogue gameplay showcase" />
+                  <img src="../images/8ball-rogue-shop.png" alt="Roguelite upgrade shop" />
                 </div>
               </div>
               <div class="gallery-caption">Roguelite Upgrade Shop</div>
@@ -282,58 +233,12 @@
             build times and testing cycles are already slower than desktop development.
           </p>
 
-          <h3>Tile System Implementation</h3>
-          <p>
-            Rooms use Unity's Rule Tile system with custom tile types that carry gameplay-relevant properties. Walls and
-            floor tiles define the room boundary and playable area. Hole tiles and obstacle-spawn tiles mark positions
-            that the room loader processes at runtime: holes get replaced with collider prefabs that handle sinking
-            logic, and obstacle spots receive randomly selected obstacle prefabs from the level's pool. The rule tile
-            setup also enables the visual style system—the same tile rules apply across all levels, but their sprite
-            sets swap based on the level's configured theme.
-          </p>
-
-          <h3>Level Generation & Room Management</h3>
-          <p>
-            Each level maintains a pool of hand-crafted room layouts. When the player enters a new room, the system
-            selects a random layout from the current level's pool and instantiates it. The room's numbered enemy
-            positions and obstacle spots are then populated based on the central config's min/max ranges and the level's
-            enemy and obstacle pools. This hybrid approach gives designers full control over spatial design while the
-            randomization layer provides replayability—no two runs feel identical even with the same room layouts.
-          </p>
-
-          <h3>Enemy Spawning & Configuration</h3>
-          <p>
-            The spawn system reads from per-level configurations that define which enemy types are available and how
-            many can appear. Each room layout contains numbered spawn positions placed by designers. At load time, the
-            system selects a count within the configured range and fills that many positions with enemies randomly drawn
-            from the level's pool. Adding a new enemy type is straightforward: create the enemy prefab with its behavior
-            script, then add it to the relevant level pools in the central config. Designers control the "what" and "how
-            many"—the code handles the "where" and "when."
-          </p>
           <figure class="inline-figure">
             <div class="image-padded">
-              <img src="../images/8ball-rogue-configurations.png" alt="Description of the screenshot" />
+              <img src="../images/8ball-rogue-configurations.png" alt="Central ScriptableObject configuration in the Unity inspector" />
             </div>
             <figcaption>Scriptable Object for central Configuration</figcaption>
           </figure>
-
-          <h3>Difficulty Scaling</h3>
-          <p>
-            Difficulty progresses through the level structure itself. Each level defines its own enemy pool with
-            progressively stronger enemy types, and the spawn count ranges increase as levels advance. Within a level,
-            the randomized enemy selection from the pool provides natural variation in challenge. This config-driven
-            approach made balancing a matter of adjusting pool compositions and count ranges rather than tuning
-            algorithms—practical for a small team that needed to iterate quickly through playtesting.
-          </p>
-
-          <h3>Mobile Optimization</h3>
-          <p>
-            Billiard physics on Android required careful attention. The collision-heavy gameplay—multiple balls
-            bouncing, rolling, and sinking simultaneously—put pressure on the physics engine. Tuning physics timesteps,
-            collider precision, and rigidbody sleep thresholds was necessary to maintain consistent performance across a
-            range of Android devices. The prefab-over-tile approach for holes and obstacles also helped here, as it gave
-            us tighter control over collider shapes and physics interactions compared to tile-based colliders.
-          </p>
 
           <h3>Lessons & Future Iterations</h3>
           <p>

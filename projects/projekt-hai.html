@@ -69,19 +69,6 @@
             with a rope will transport the player to the victory scene.
           </p>
 
-          <p>
-            To achieve a connection between the real crank and the game, we connected the crank to an ESP32
-            microcontroller that connects to an MQTT server and writes the current rotation value of the crank to a
-            specific topic. The game then connected to the MQTT server, read the rotation value, and smoothly rotated
-            the virtual crank accordingly, changing the fishing hook's height in the process.
-          </p>
-
-          <p>
-            Our team consisted of three developers: two media informatics students with Unity experience and one pure
-            informatics student without Unity experience. Having the most experience in Unity game development, I was
-            tasked with the more complex system development regarding the bait-rod-fish interactions as well as figuring
-            out the fishing rod behaviour from the rotation data.
-          </p>
         </div>
       </section>
 
@@ -90,10 +77,10 @@
         <h2>My Role: Systems Programming</h2>
         <div class="reveal">
           <p>
-            While this was a team effort, my primary responsibility was the core gameplay systems, specifically the
-            interactions between the fishing rod, bait, and fish, as well as the translation of real-life rotation data
-            to the virtual fishing rod. This was more than just coding mechanics; it was about creating a satisfying,
-            intuitive interaction model in VR.
+            Our team consisted of three developers: two media informatics students with Unity experience and one pure
+            informatics student without Unity experience. As the most experienced Unity developer, I owned the core
+            gameplay systems—specifically the interactions between the fishing rod, bait, and fish, as well as
+            translating real-world rotation data into the virtual fishing rod.
           </p>
 
           <div class="highlight-box">
@@ -116,7 +103,7 @@
           </p>
           <figure class="inline-figure">
             <div class="image-padded">
-              <img src="../images/projekt-hai-box.png" alt="Description of the screenshot" />
+              <img src="../images/projekt-hai-box.png" alt="Bait box with grabbable anemone, coin and steak" />
             </div>
             <figcaption>Bait Box with the grabbable anemone, coin and steak</figcaption>
           </figure>
@@ -135,9 +122,10 @@
           <p>
             Setting up the microcontroller, MQTT server, and game connection required some assistance and took a few
             weeks to get running, while we got gameplay interactions working much more quickly. The rope simulation
-            remained tricky to the end, though. The rope sometimes disconnected from the fishing rod due to
-            inconsistencies between the physics refresh rate and the refresh rate of the VR controller object, which
-            was a difficult problem that was still not fully solved in the final build.
+            remained tricky to the end—it sometimes disconnected from the fishing rod due to inconsistencies between
+            the physics refresh rate and the VR controller object's refresh rate, a problem that was not fully solved
+            in the final build. VR also made it challenging to prevent the player from reaching off-limits areas,
+            which required diligent boundary tagging across the scene.
           </p>
         </div>
       </section>
@@ -155,35 +143,35 @@
           <div class="gallery-grid reveal-stagger">
             <div class="gallery-item">
               <div class="gallery-image">
-                <img src="../images/projekt-hai-gameplay.gif" />
+                <img src="../images/projekt-hai-gameplay.gif" alt="Fishing mechanics in action with custom controller" />
               </div>
               <div class="gallery-caption">Fishing mechanics in action with custom controller</div>
             </div>
 
             <div class="gallery-item">
               <div class="gallery-image">
-                <img src="../images/projekt-hai-gameplay-2.gif" />
+                <img src="../images/projekt-hai-gameplay-2.gif" alt="First-person VR perspective in the aquarium" />
               </div>
               <div class="gallery-caption">First-person VR perspective in the aquarium</div>
             </div>
 
             <div class="gallery-item">
               <div class="gallery-image">
-                <img src="../images/projekt-hai-aquarium.png" />
+                <img src="../images/projekt-hai-aquarium.png" alt="Front view of the aquarium" />
               </div>
               <div class="gallery-caption">Front View of the Aquarium</div>
             </div>
 
             <div class="gallery-item">
               <div class="gallery-image">
-                <img src="../images/projekt-hai-wip.gif" />
+                <img src="../images/projekt-hai-wip.gif" alt="Early development iteration of the fishing rod MQTT connection" />
               </div>
               <div class="gallery-caption">Early development iteration of the fishing rod MQTT connection</div>
             </div>
 
             <div class="gallery-item">
               <div class="gallery-image">
-                <img src="../images/projekt-hai-custom-controller.png" />
+                <img src="../images/projekt-hai-custom-controller.png" alt="VR controller with added rotating mechanism" />
               </div>
               <div class="gallery-caption">VR controller with added rotating mechanism</div>
             </div>
@@ -245,18 +233,6 @@
             the toolkit's event model. Getting layer mask switching right, particularly ensuring caught fish
             transitioned cleanly between their swimming and grabbable states without physics artifacts, required careful
             sequencing of the XR lifecycle callbacks.
-          </p>
-
-          <h3>VR-Specific Challenges</h3>
-          <p>
-            As already mentioned, the rope simulation had some trouble staying connected to the fishing rod while in VR
-            mode, because there was a significant difference in refresh rates between the physics simulation and the
-            controller object.
-          </p>
-
-          <p>
-            Additionally, it was quite challenging to prevent the player from reaching areas they should not be able to
-            reach, which required me and the team to diligently tag areas that should be off-limits accordingly.
           </p>
 
           <h3>Lessons Learned</h3>
